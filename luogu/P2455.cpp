@@ -12,10 +12,10 @@ int main()
         scanf("%lf", b + i);
     }
     int r = 1, c = 1;
-    cerr << __LINE__ << endl;
+    // cerr << __LINE__ << endl;
     for (; c <= n; c++)
     {
-        cerr << ":" << c << endl;
+        // cerr << ":" << c << endl;
         int t = r;
         for (int i = r; i <= n; i++)
             if (fabs(a[i][c]) > fabs(a[t][c]))
@@ -31,6 +31,8 @@ int main()
         a[r][c] = 1;
         for (int i = 1; i <= n; i++)
         {
+            if (i == r)
+                continue;
             double d = a[i][c];
             for (int j = c; j <= n; j++)
                 a[i][j] -= a[r][j] * d;
@@ -42,7 +44,7 @@ int main()
     {
         while (r != n + 1)
         {
-            if (fabs(b[r]) < eps)
+            if (fabs(b[r]) > eps)
             {
                 puts("-1");
                 return 0;
