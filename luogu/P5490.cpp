@@ -2,7 +2,7 @@
 using namespace std;
 const int MAXN = 1e5 + 7;
 int n;
-int dx[MAXN * 2], dxs, dy[MAXN * 2], dys;
+int dy[MAXN * 2], dys;
 class Seg
 {
 public:
@@ -12,24 +12,54 @@ public:
         return this->x < b.x;
     }
 };
-Seg segs[MAXN * 2];
-int c[MAXN * 2];
-int lookupx(int x)
+class SegNode
 {
-    int l = 0, r = dxs - 1;
-    while (l != r)
-    {
-        int mid = (l + r) >> 1;
-        if (dx[mid] < x)
-            l = mid + 1;
-        else
-            r = mid;
-    }
-    return l;
+public:
+    int l, r;
+    int len, cnt;
+};
+Seg segs[MAXN * 2];
+SegNode segnodes[MAXN * 8];
+void build(int l, int r, int node)
+{
+    segnodes[node].l = l;
+    segnodes[node].r = r;
+    segnodes[node].len = 0;
+    segnodes[node].cnt = 0;
+    if (l == r)
+        return;
+    int mid = (l + r) >> 1;
+    build(l, mid, node * 2);
+    build(mid + 1, r, node * 2 + 1);
 }
+void update(int node)
+{
+    if (segnodes[node].cnt)
+        segnodes[node].len = dy[segnodes[node].r + 1] - dy[segnodes[node].l];
+    else
+        segnodes[node].len = segnodes[node * 2].len + segnodes[node * 2 + 1].len;
+}
+void add(int l, int r, int node, int k)
+{
+    // printf("%d %d %d\n", l, r, node);
+    if (l <= segnodes[node].l && segnodes[node].r <= r)
+    {
+        segnodes[node].cnt += k;
+        update(node);
+        return;
+    }
+    int mid = (segnodes[node].l + segnodes[node].r) >> 1;
+    if (l <= mid)
+        add(l, r, node * 2, k);
+    if (r > mid)
+        add(l, r, node * 2 + 1, k);
+    update(node);
+}
+
+int c[MAXN * 2];
 int lookupy(int x)
 {
-    int l = 0, r = dys - 1;
+    int l = 1, r = dys;
     while (l != r)
     {
         int mid = (l + r) >> 1;
@@ -55,19 +85,15 @@ int main()
         segs[i * 2 + 1].y1 = y1;
         segs[i * 2 + 1].y2 = y2;
         segs[i * 2 + 1].k = -1;
-        dx[i * 2] = x1;
-        dx[i * 2 + 1] = x2;
-        dy[i * 2] = y1;
-        dy[i * 2 + 1] = y2;
+        dy[i * 2 + 1] = y1;
+        dy[i * 2 + 2] = y2;
     }
-    sort(dx, dx + n * 2);
-    dxs = unique(dx, dx + n * 2) - dx;
-    sort(dy, dy + n * 2);
-    dys = unique(dy, dy + n * 2) - dy;
+    sort(dy + 1, dy + n * 2 + 1);
+    dys = unique(dy + 1, dy + n * 2 + 1) - dy - 1;
     sort(segs, segs + n * 2);
+    build(1, dys, 1);
     for (int i = 0; i < n * 2; i++)
     {
-        segs[i].x = lookupx(segs[i].x);
         segs[i].y1 = lookupy(segs[i].y1);
         segs[i].y2 = lookupy(segs[i].y2);
         // printf("%d %d %d %d\n", segs[i].x, segs[i].y1, segs[i].y2, segs[i].k);
@@ -75,18 +101,11 @@ int main()
     unsigned long long Ans = 0;
     for (int i = 0; i < n * 2; i++)
     {
-        for (int j = segs[i].y1; j < segs[i].y2; j++)
-            c[j] += segs[i].k;
-        if (i < n * 2 - 1)
-        {
-            unsigned long long h = 0;
-            for (int j = 1; j < dys; j++)
-            {
-                if (c[j - 1])
-                    h += dy[j] - dy[j - 1];
-            }
-            Ans += h * (dx[i + 1] - dx[i]);
-        }
+        printf("%d %d\n", segs[i].y1, segs[i].y2);
+        add(segs[i].y1, segs[i].y2, 1, segs[i].k);
+        printf("%d\n", segnodes[1].len);
+        if (i != n * 2 - 1)
+            Ans += (unsigned long long)(segnodes[1].len) * (segs[i + 1].x - segs[i].x);
     }
     printf("%llu\n", Ans);
     return 0;
