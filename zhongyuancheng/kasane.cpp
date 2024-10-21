@@ -18,7 +18,7 @@ void solve()
                 {
                     for (int j = 0; j < s; j++)
                     {
-                        if (str[l + j] != str[l + i * s + j])
+                        if (str[l + j] != str[l + i * s + s - j - 1])
                         {
                             flag1 = false;
                             goto kel;
@@ -29,7 +29,7 @@ void solve()
                 {
                     for (int j = 0; j < s; j++)
                     {
-                        if (str[l + j] != str[l + i * s + s - j - 1])
+                        if (str[l + j] != str[l + i * s + j])
                         {
                             flag1 = false;
                             goto kel;
