@@ -39,7 +39,7 @@ int main()
         int u, v;
         scanf("%d %d", &u, &v);
         e[u] = new P(v, e[u]);
-        e[v] = new P(u, e[u]);
+        e[v] = new P(u, e[v]);
     }
     printf("%d\n", dfs(1, 0, d) - 1);
     return 0;
