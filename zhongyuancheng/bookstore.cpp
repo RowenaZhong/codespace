@@ -44,8 +44,8 @@ void solve()
 }
 int main()
 {
-    // freopen("bookstore.in", "r", stdin);
-    // freopen("bookstore.out", "w", stdout);
+    freopen("bookstore.in", "r", stdin);
+    freopen("bookstore.out", "w", stdout);
     scanf("%d", &T);
     while (T--)
         solve();
