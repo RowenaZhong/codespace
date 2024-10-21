@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 const int MAXN = 1e5;
@@ -47,15 +48,17 @@ void adxor(int node, int l, int r)
         seg[node].sum = (seg[node].r - seg[node].l + 1) - seg[node].sum;
         return;
     }
+    spread(node);
     int mid = (seg[node].l + seg[node].r) >> 1;
     if (l <= mid)
         adxor(node * 2, l, r);
     if (r > mid)
         adxor(node * 2 + 1, l, r);
+    seg[node].sum = seg[node * 2].sum + seg[node * 2 + 1].sum;
 }
 int query(int node, int l, int r)
 {
-    if (seg[node].l == seg[node].r)
+    if (l <= seg[node].l && seg[node].r <= r)
         return seg[node].sum;
     spread(node);
     int mid = (seg[node].l + seg[node].r) >> 1;
