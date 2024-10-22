@@ -18,8 +18,8 @@ public:
     int l, r;
     int len, cnt;
 };
-Seg segs[MAXN * 2];
-SegNode segnodes[MAXN * 8];
+Seg segs[MAXN * 8];
+SegNode segnodes[MAXN * 16];
 int maxn = INT_MIN;
 void build(int l, int r, int node)
 {
