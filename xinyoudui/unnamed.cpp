@@ -52,18 +52,19 @@ int main()
 {
     freopen("unnamed.in", "r", stdin);
     freopen("unnamed.out", "w", stdout);
-    for (int i = 1; i <= 1000; i++)
+    accept[1] = true;
+    for (int i = 2; i <= 1000; i++)
         for (int j = i * i; j <= 1e6; j *= i)
             accept[j] = true;
     for (int i = 1; i <= 1000; i++)
         for (int j = 1; j <= 1000; j++)
             s[i][j] = s[i][j - 1] + s[i - 1][j] - s[i - 1][j - 1] + accept[i * j / gcd(i, j)];
-    cerr << __LINE__ << endl;
+    // cerr << __LINE__ << endl;
     int T;
     readi(T);
     while (T--)
     {
-        cerr << T << endl;
+        // cerr << T << endl;
         int a, b, c, d;
         readi(a);
         readi(b);
