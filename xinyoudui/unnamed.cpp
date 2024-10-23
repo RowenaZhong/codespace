@@ -40,7 +40,7 @@ inline void writei(T x)
 
 int main()
 {
-    freopen(".in", "r", stdin);
-    freopen(".out", "w", stdout);
+    freopen("unnamed.in", "r", stdin);
+    freopen("unnamed.out", "w", stdout);
     return 0;
 }

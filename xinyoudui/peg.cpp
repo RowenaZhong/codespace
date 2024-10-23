@@ -38,6 +38,14 @@ inline void writei(T x)
     }
 }
 int s[100005];
+#define lowbit(x) ((x) & (-x))
+inline int count1(int x)
+{
+    int ret = 0;
+    while (x)
+        x -= lowbit(x), ret++;
+    return ret;
+}
 string str;
 string getstr()
 {
@@ -52,45 +60,26 @@ string getstr()
     }
     return ret;
 }
-map<int, int> lasti;
 int main()
 {
     freopen("easygame.in", "r", stdin);
-    freopen("easygame.out", "w", stdout);
+    freopen("easygame.ans", "w", stdout);
     str = getstr();
-    int Ans = 0;
-    lasti[0] = 0;
-    for (int i = 0; i < 26; i++)
-        lasti[1 << i] = 0;
     for (int i = 1; i <= str.size(); i++)
     {
         char ch = str[i - 1];
         s[i] = s[i - 1] ^ (1 << (ch - 'a'));
-        if (lasti.count(s[i]))
+    }
+    for (int len = str.size(); len >= 1; len--)
+    {
+        for (int l = 0; l + len <= str.size(); l++)
         {
-            Ans = max(Ans, i - lasti[s[i]]);
-        }
-        else
-            lasti[s[i]] = i;
-        for (int j = 0; j < 26; j++)
-        {
-            int t = s[i] ^ (1 << j);
-            if (!lasti.count(t))
-                lasti[t] = i;
+            if (count1(s[l + len] ^ s[l]) <= 1)
+            {
+                writei(len);
+                return 0;
+            }
         }
     }
-    writei(Ans);
-    putchar('\n');
-    // for (int len = str.size(); len >= 1; len--)
-    // {
-    //     for (int l = 0; l + len <= str.size(); l++)
-    //     {
-    //         if (count1(s[l + len] ^ s[l]) <= 1)
-    //         {
-    //             writei(len);
-    //             return 0;
-    //         }
-    //     }
-    // }
     return 0;
 }
