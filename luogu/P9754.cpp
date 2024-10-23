@@ -57,6 +57,8 @@ public:
             offset = offset - (offset % TypeDefine[type].general_offset) + TypeDefine[type].general_offset;
         this->offset.push_back(offset);
         this->size = offset + TypeDefine[type].size;
+        if(this->size%TypeDefine[type].general_offset)
+            this->size = this->size - (this->size % TypeDefine[type].general_offset) + TypeDefine[type].general_offset;
         this->general_offset = max(this->general_offset, TypeDefine[type].general_offset);
         return offset;
     }
@@ -159,25 +161,25 @@ int main()
     while (T--)
     {
         solve();
-        // for (int i = 0; i < TypeIdent.size(); i++)
-        // {
-        //     printf("struct %d\n", i);
-        //     printf("\tsize = %llu\n", TypeDefine[i].size);
-        //     printf("\tgeneral offset = %llu\n", TypeDefine[i].general_offset);
-        //     printf("\ttypes = ");
-        //     for (const auto &c : TypeDefine[i].type)
-        //         printf("\t%u", c);
-        //     printf("\n");
-        //     printf("\tvalue = ");
-        //     for (const auto &c : TypeDefine[i].value)
-        //         printf("\t%u", c);
-        //     printf("\n");
-        //     printf("\toffset= ");
-        //     for (const auto &c : TypeDefine[i].offset)
-        //         printf("\t%llu", c);
-        //     printf("\n");
-        //     printf("\n");
-        // }
+        for (int i = 0; i < TypeIdent.size(); i++)
+        {
+            printf("struct %d\n", i);
+            printf("\tsize = %llu\n", TypeDefine[i].size);
+            printf("\tgeneral offset = %llu\n", TypeDefine[i].general_offset);
+            printf("\ttypes = ");
+            for (const auto &c : TypeDefine[i].type)
+                printf("\t%u", c);
+            printf("\n");
+            printf("\tvalue = ");
+            for (const auto &c : TypeDefine[i].value)
+                printf("\t%u", c);
+            printf("\n");
+            printf("\toffset= ");
+            for (const auto &c : TypeDefine[i].offset)
+                printf("\t%llu", c);
+            printf("\n");
+            printf("\n");
+        }
     }
 
     return 0;
