@@ -48,24 +48,26 @@ public:
         this->next = n;
     }
 };
-const int MAXN = 1e6 + 7;
-P *e[MAXN];
 int n1, n, m;
-int d[MAXN];
-void dfs(int x, int fa, int t)
+P *e[100005];
+int deg[100005], d[100005];
+int tt[100005];
+int dy[100005];
+int ans[100005];
+vector<pair<int, int>> e2;
+void dfs(int x, int fa, int dep)
 {
-    d[x] = t;
+    tt[dep]++;
+    d[x] = dep;
     for (P *p = e[x]; p; p = p->next)
     {
         if (p->to == fa)
             continue;
-        dfs(p->to, x, t + 1);
+        dfs(p->to, x, dep + 1);
     }
 }
 int main()
 {
-    freopen("blocktree.in", "r", stdin);
-    freopen("blocktree.out", "w", stdout);
     readi(n1);
     readi(n);
     readi(m);
@@ -74,11 +76,120 @@ int main()
         int u, v;
         readi(u);
         readi(v);
+        deg[u]++, deg[v]++;
         e[u] = new P(v, e[u]);
         e[v] = new P(u, e[v]);
     }
     dfs(1, 0, 1);
-    for (int i =)
+    int tot1 = 0, tot2 = 0, flag1 = true, flag2 = true;
+    for (int i = 1; i <= n1; i++)
+    {
+        if (d[i] & 1)
+        {
+            if (deg[i] == 1)
+                flag1 = false;
+            tot1++;
+        }
+        else
+        {
+            if (deg[i] == 1)
+                flag2 = false;
+            tot2++;
+        }
+    }
+    int ks = n1 - n;
+    if ((!flag1 || tot1 != ks) && (!flag2 || tot2 != ks))
+    {
         puts("No");
+        return 0;
+    }
+    int tote = 0;
+    if (tot2 == ks)
+    {
+        for (int i = 1; i <= n1; i++)
+            d[i]--;
+    }
+    for (int i = 1; i <= n1; i++)
+    {
+        if (d[i] & 1)
+            if (deg[i] == 2)
+                tote++;
+            else
+                tote += deg[i];
+    }
+    if (tote > m)
+    {
+        puts("No");
+        return 0;
+    }
+    int tt = 0;
+    for (int i = 1; i <= n1; i++)
+    {
+        if (d[i] & 1)
+        {
+            if (deg[i] != 2)
+            {
+                P *p = e[i];
+                for (p = e[i]; p->next; p = p->next)
+                    e2.push_back(make_pair(p->to, p->next->to));
+                e2.push_back(make_pair(e[i]->to, p->to));
+            }
+            else
+                e2.push_back(make_pair(e[i]->to, e[i]->next->to));
+        }
+        else
+        {
+            tt++;
+            ans[i] = tt;
+        }
+    }
+    int mt = m - tote;
+    for (int i = 1; i <= n1; i++)
+    {
+        if (mt == 0)
+            break;
+        if (d[i] & 1)
+        {
+            if (deg[i] > 3)
+            {
+                for (P *p1 = e[i]; p1; p1 = p1->next)
+                {
+                    if (p1->next == nullptr)
+                        continue;
+                    for (P *p2 = p1->next->next; p2; p2 = p2->next)
+                    {
+                        if (p1 == e[i])
+                            if (p2->next == nullptr)
+                                continue;
+                        if (mt)
+                        {
+                            e2.push_back(make_pair(p1->to, p2->to));
+                            mt--;
+                        }
+                        else
+                            break;
+                    }
+                }
+            }
+        }
+    }
+    if (mt != 0)
+    {
+        puts("No");
+        return 0;
+    }
+    puts("Yes");
+    for (int i = 1; i <= n1; i++)
+    {
+        writei(ans[i]);
+        putchar(" \n"[i == n1]);
+    }
+    for (int i = 0; i < m; i++)
+    {
+        writei(ans[e2[i].first]);
+        putchar(' ');
+        writei(ans[e2[i].second]);
+        putchar('\n');
+    }
     return 0;
 }
