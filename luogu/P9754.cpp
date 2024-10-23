@@ -18,7 +18,9 @@ public:
     vector<Ident> QueryValueName(Addr x)
     {
         if (x >= this->size)
-            return vector<Ident>(INT_MAX);
+        {
+            return vector<Ident>{INT_MAX};
+        }
         if (this->offset.size() == 0)
             return vector<Ident>();
         int l = 0, r = this->offset.size() - 1;
@@ -52,15 +54,19 @@ public:
     {
         this->type.push_back(type);
         this->value.push_back(value);
-        int offset = this->size;
+        Addr offset = this->size;
         if (offset % TypeDefine[type].general_offset)
             offset = offset - (offset % TypeDefine[type].general_offset) + TypeDefine[type].general_offset;
         this->offset.push_back(offset);
         this->size = offset + TypeDefine[type].size;
-        if(this->size%TypeDefine[type].general_offset)
-            this->size = this->size - (this->size % TypeDefine[type].general_offset) + TypeDefine[type].general_offset;
         this->general_offset = max(this->general_offset, TypeDefine[type].general_offset);
         return offset;
+    }
+    Addr Package()
+    {
+        if (this->size % this->general_offset)
+            this->size = this->size - (this->size % this->general_offset) + this->general_offset;
+        return this->size;
     }
     TypeDef()
     {
@@ -93,7 +99,7 @@ void solve()
             }
             TypeDefine[Ident_Type_s].AddValue(TypeIdent[t], ValueIdent[n]);
         }
-        printf("%llu %llu\n", TypeDefine[Ident_Type_s].size, TypeDefine[Ident_Type_s].general_offset);
+        printf("%llu %llu\n", TypeDefine[Ident_Type_s].Package(), TypeDefine[Ident_Type_s].general_offset);
         break;
     case 2:
         scanf("%s %s", t, n);
@@ -141,6 +147,27 @@ void solve()
         }
         putchar('\n');
         break;
+    case 5:
+        for (int i = 0; i < TypeIdent.size(); i++)
+        {
+            printf("struct %d\n", i);
+            printf("\tsize = %llu\n", TypeDefine[i].size);
+            printf("\tgeneral offset = %llu\n", TypeDefine[i].general_offset);
+            printf("\ttypes = ");
+            for (const auto &c : TypeDefine[i].type)
+                printf("\t%u", c);
+            printf("\n");
+            printf("\tvalue = ");
+            for (const auto &c : TypeDefine[i].value)
+                printf("\t%u", c);
+            printf("\n");
+            printf("\toffset= ");
+            for (const auto &c : TypeDefine[i].offset)
+                printf("\t%llu", c);
+            printf("\n");
+            printf("\n");
+        }
+        break;
     default:
         break;
     }
@@ -161,25 +188,6 @@ int main()
     while (T--)
     {
         solve();
-        for (int i = 0; i < TypeIdent.size(); i++)
-        {
-            printf("struct %d\n", i);
-            printf("\tsize = %llu\n", TypeDefine[i].size);
-            printf("\tgeneral offset = %llu\n", TypeDefine[i].general_offset);
-            printf("\ttypes = ");
-            for (const auto &c : TypeDefine[i].type)
-                printf("\t%u", c);
-            printf("\n");
-            printf("\tvalue = ");
-            for (const auto &c : TypeDefine[i].value)
-                printf("\t%u", c);
-            printf("\n");
-            printf("\toffset= ");
-            for (const auto &c : TypeDefine[i].offset)
-                printf("\t%llu", c);
-            printf("\n");
-            printf("\n");
-        }
     }
 
     return 0;
