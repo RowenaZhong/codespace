@@ -20,6 +20,7 @@ public:
     }
     Matrix(const Matrix<H, W, T> &copyfrom)
     {
+        // cerr << "!" << __LINE__ << endl;
         this->content = new T *[H];
         for (Dim i = 0; i < H; i++)
         {
@@ -27,6 +28,16 @@ public:
             for (Dim j = 0; j < W; j++)
                 this->content[i][j] = copyfrom[i][j];
         }
+    }
+    const Matrix &operator=(const Matrix<H, W, T> &copyfrom)
+    {
+        // cerr << "!" << __LINE__ << endl;
+        for (Dim i = 0; i < H; i++)
+        {
+            for (Dim j = 0; j < W; j++)
+                this->content[i][j] = copyfrom[i][j];
+        }
+        return *this;
     }
     T *operator[](Dim h)
     {
@@ -40,10 +51,7 @@ public:
 template <Dim H, Dim W, Dim M, typename T>
 Matrix<H, W, T> operator*(const Matrix<H, M, T> &A, const Matrix<M, W, T> &B)
 {
-    printf("!OK");
-    cout << H << " " << W << endl;
     Matrix<H, W, T> R;
-    printf("!OK");
     for (int i = 0; i < H; i++)
         for (int j = 0; j < W; j++)
             for (int k = 0; k < M; k++)
@@ -68,12 +76,13 @@ Matrix<H, H, T> power(const Matrix<H, H, T> &MA, unsigned long long k, T p)
         M[i][i] = 1;
     while (k)
     {
-        printf("%llu\n", k);
+        // printf("%llu\n", k);
         if (k & 1)
             M = M * A % p;
         A = A * A % p;
         k >>= 1;
     }
+    // cerr << __LINE__ << endl;
     return M;
 }
 
@@ -86,7 +95,8 @@ int main()
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
             cin >> Mat[i][j];
-    Mat = power(Mat, k, 1000);
+    power(Mat, k, 1000);
+    // cerr << __LINE__ << endl;
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
             printf("%d%c", Mat[i][j], " \n"[j == n - 1]);
