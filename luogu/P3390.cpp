@@ -95,7 +95,7 @@ int main()
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
             cin >> Mat[i][j];
-    power(Mat, k, 1000);
+    Mat = power(Mat, k, 1000);
     // cerr << __LINE__ << endl;
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
