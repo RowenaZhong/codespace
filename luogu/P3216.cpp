@@ -97,19 +97,20 @@ int main()
     T[0][0] = 0;
     T[1][0] = 1;
     T[2][0] = 1;
-    F[0][0] = F[0][1] = F[1][1] = F[1][2] = F[2][2] = 1;
+    F[0][1] = F[1][1] = F[1][2] = F[2][2] = 1;
     // i = 0
     LDim k = 1;
     cin >> n >> m;
+    F[0][0] = 10 % m;
     Mod = m;
     while (k * 10 <= n)
     {
         // k ~ 10k-1
-        T = T * power(F, k * 9, m);
+        T = power(F, k * 9, m) * T;
         k *= 10;
-        F[0][0]++;
+        F[0][0] = F[0][0] * 10 % m;
     }
-    T=T*power(F, n - k + 1, m);
+    T = power(F, n - k + 1, m) * T;
     cout << T[0][0] << endl;
     return 0;
 }
