@@ -134,7 +134,7 @@ int main()
     F[4][0] = F[4][2] = F[4][7] = F[4][9] = 1;
     F[4][4] = x;
     F[4][5] = y;
-    F[4][9] = 2;
+    F[4][10] = 2;
     F[5][4] = 1;
     F[6][6] = F[6][10] = 1;
     F[6][7] = 2;
@@ -144,10 +144,6 @@ int main()
     F[9][9] = z;
     F[10][10] = 1;
     T = power(F, n - 2) * T;
-    for (int i = 0; i < 11; i++)
-    {
-        printf("%llu\n", T[i][0]);
-    }
     printf("nodgd %llu\n", T[0][0]);
     printf("Ciocio %llu\n", T[2][0]);
     printf("Nicole %llu\n", T[4][0]);
