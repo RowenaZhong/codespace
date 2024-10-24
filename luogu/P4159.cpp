@@ -86,7 +86,8 @@ Matrix<H, H, T> power(const Matrix<H, H, T> &MA, unsigned long long k)
     // cerr << __LINE__ << endl;
     return M;
 }
-Dim N, DimT;
+Dim N;
+int DimT;
 #define get_pos(n, t) 10 * (t) + (n) - 1
 int main()
 {
