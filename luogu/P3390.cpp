@@ -48,6 +48,7 @@ public:
         return (this->content[h]);
     }
 };
+const unsigned long long Mod = 1e9 + 7;
 template <Dim H, Dim W, Dim M, typename T>
 Matrix<H, W, T> operator*(const Matrix<H, M, T> &A, const Matrix<M, W, T> &B)
 {
@@ -55,7 +56,7 @@ Matrix<H, W, T> operator*(const Matrix<H, M, T> &A, const Matrix<M, W, T> &B)
     for (int i = 0; i < H; i++)
         for (int j = 0; j < W; j++)
             for (int k = 0; k < M; k++)
-                R[i][j] += A[i][k] * B[k][j];
+                R[i][j] = (R[i][j] + A[i][k] * B[k][j] % Mod) % Mod;
     return R;
 }
 template <Dim H, Dim W, typename T>
@@ -78,8 +79,8 @@ Matrix<H, H, T> power(const Matrix<H, H, T> &MA, unsigned long long k, T p)
     {
         // printf("%llu\n", k);
         if (k & 1)
-            M = M * A % p;
-        A = A * A % p;
+            M = M * A;
+        A = A * A;
         k >>= 1;
     }
     // cerr << __LINE__ << endl;
@@ -91,14 +92,14 @@ unsigned long long k;
 int main()
 {
     cin >> n >> k;
-    Matrix<100, 100, int> Mat;
+    Matrix<100, 100, unsigned long long> Mat;
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
             cin >> Mat[i][j];
-    Mat = power(Mat, k, 1000);
+    Mat = power(Mat, k, (unsigned long long)(1e9 + 7));
     // cerr << __LINE__ << endl;
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
-            printf("%d%c", Mat[i][j], " \n"[j == n - 1]);
+            printf("%llu%c", Mat[i][j], " \n"[j == n - 1]);
     return 0;
 }
