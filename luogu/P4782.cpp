@@ -78,7 +78,7 @@ int main()
     puts("POSSIBLE");
     for (int i = 1; i <= n; i++)
     {
-        printf("%d%c", int(dfn[i] < dfn[i + n]), " \n"[i == n]);
+        printf("%d%c", int(scc[i] < scc[i + n]), " \n"[i == n]);
     }
     return 0;
 }
