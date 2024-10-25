@@ -43,13 +43,13 @@ int main()
     {
         int t = que.front();
         que.pop();
-        c[t] -= u[t];
         for (P *p = e[t]; p; p = p->next)
         {
             if (c[t] > 0)
                 c[p->to] += p->weight * c[t];
             if (--degin[p->to] == 0)
-                que.push(p->to);
+                que.push(p->to),
+                    c[p->to] -= u[p->to];
         }
     }
     int cnt = 0;
