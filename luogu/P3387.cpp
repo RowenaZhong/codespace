@@ -87,9 +87,9 @@ int main()
         que.pop();
         SCC::dp[x] += SCC::a[x];
         Ans = max(Ans, SCC::dp[x]);
-        for (P *p = e[x]; p; p = p->next)
+        for (P *p = SCC::e[x]; p; p = p->next)
         {
-            SCC::dp[p->to] += SCC::dp[x];
+            SCC::dp[p->to] = max(SCC::dp[p->to], SCC::dp[x]);
             if (--SCC::deg[p->to] == 0)
                 que.push(p->to);
         }
