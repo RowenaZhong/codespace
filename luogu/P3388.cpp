@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int MAXN = 1e4 + 7;
+const int MAXN = 2e4 + 7;
 int a[MAXN];
 class P
 {
@@ -30,18 +30,15 @@ void tarjan(int x, int root)
             low[x] = min(low[x], low[p->to]);
             if (low[p->to] >= dfn[x] && x != root)
                 Ans.insert(x);
-            if (x == root)
-                child++;
+            child++;
         }
     }
-    if (child >= 2)
+    if (child >= 2 && x == root)
         Ans.insert(x);
 }
 int main()
 {
     scanf("%d %d", &n, &m);
-    for (int i = 1; i <= n; i++)
-        scanf("%d", a + i);
     while (m--)
     {
         int u, v;
