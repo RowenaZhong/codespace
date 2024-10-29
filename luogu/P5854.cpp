@@ -1,6 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int MAXN = 1e7 + 9;
+template <typename T>
+inline void readi(T &x)
+{
+    T f = 1;
+    x = 0;
+    int ch;
+    while (ch = getchar(), !feof(stdin) && !isdigit(ch) && ch != '-')
+        ;
+    if (ch == '-')
+        f = -f, ch = getchar();
+    while (!feof(stdin) && isdigit(ch))
+    {
+        x = (x << 3) + (x << 1) + ch - 0x30;
+        ch = getchar();
+    }
+    x *= f;
+}
+template <typename T>
+inline void writei(T x)
+{
+    if (x == 0)
+    {
+        putchar('0');
+        return;
+    }
+    if (x < 0)
+        x = -x, putchar('-');
+    T p = 1;
+    while (x / p >= 10)
+        p = (p << 3) + (p << 1);
+    while (p)
+    {
+        putchar(x / p + 0x30);
+        x %= p;
+        p /= 10;
+    }
+}
+
 class Node
 {
 public:
@@ -20,7 +58,7 @@ public:
 Node tree[MAXN];
 int n;
 int right_nodes[MAXN], tot = 0;
-void add_node(int k, int p)
+inline void add_node(int k, int p)
 {
     tree[k].p = p;
     while (tot && tree[right_nodes[tot]].p > p)
@@ -37,11 +75,11 @@ void add_node(int k, int p)
 }
 int main()
 {
-    scanf("%d", &n);
+    readi(n);
     for (int i = 1; i <= n; i++)
     {
         int p;
-        scanf("%d", &p);
+        readi(p);
         add_node(i, p);
     }
     long long ansl = 0, ansr = 0;
@@ -50,6 +88,9 @@ int main()
         ansl ^= i * (tree[i].l + 1);
         ansr ^= i * (tree[i].r + 1);
     }
-    printf("%lld %lld\n", ansl, ansr);
+    writei(ansl);
+    putchar(' ');
+    writei(ansr);
+    putchar('\n');
     return 0;
 }
