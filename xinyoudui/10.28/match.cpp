@@ -60,7 +60,7 @@ int main()
     freopen("match.in", "r", stdin);
     freopen("match.out", "w", stdout);
     readi(n);
-    long long ans = 0;
+    long long ans1 = 0, ans2 = 0;
     for (int i = 1; i <= n; i++)
     {
         for (int j = 1; j <= n; j++)
@@ -68,15 +68,26 @@ int main()
             a[i][j] = readc();
             if (a[i][j] == 0)
                 dp[i][j] = 1;
-            if (a[i][j] == a[i - 1][j] + 1)
-                dp[i][j] += dp[i - 1][j];
             if (a[i][j] == a[i][j - 1] + 1)
                 dp[i][j] += dp[i][j - 1];
             if (a[i][j] == 2)
-                ans += dp[i][j];
+                ans1 += dp[i][j];
         }
     }
-    writei(ans);
+    memset(dp, 0x00, sizeof(dp));
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            if (a[i][j] == 0)
+                dp[i][j] = 1;
+            if (a[i][j] == a[i - 1][j] + 1)
+                dp[i][j] += dp[i - 1][j];
+            if (a[i][j] == 2)
+                ans2 += dp[i][j];
+        }
+    }
+    writei(max(ans1, ans2));
     putchar('\n');
     return 0;
 }
