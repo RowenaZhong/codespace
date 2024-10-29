@@ -20,7 +20,6 @@ public:
 };
 Seg segs[MAXN * 8];
 SegNode segnodes[MAXN * 16];
-int maxn = INT_MIN;
 void build(int l, int r, int node)
 {
     segnodes[node].l = l;
@@ -35,8 +34,6 @@ void build(int l, int r, int node)
 }
 void update(int node)
 {
-    if (segnodes[node].l == maxn && segnodes[node].r == maxn)
-        return;
     if (segnodes[node].cnt)
         segnodes[node].len = dy[segnodes[node].r + 1] - dy[segnodes[node].l];
     else
@@ -101,16 +98,16 @@ int main()
     {
         segs[i].y1 = lookupy(segs[i].y1);
         segs[i].y2 = lookupy(segs[i].y2);
-        maxn = max(maxn, segs[i].y1);
         // printf("%d %d %d %d\n", segs[i].x, segs[i].y1, segs[i].y2, segs[i].k);
     }
     unsigned long long Ans = 0;
-    for (int i = 0; i < n * 2 - 1; i++)
+    for (int i = 0; i < n * 2; i++)
     {
         // printf("%d %d\n", segs[i].y1, segs[i].y2);
         add(segs[i].y1, segs[i].y2 - 1, 1, segs[i].k);
         // printf("%d\n", segnodes[1].len);
-        Ans += (unsigned long long)(segnodes[1].len) * (segs[i + 1].x - segs[i].x);
+        if (i != n * 2 - 1)
+            Ans += (unsigned long long)(segnodes[1].len) * (segs[i + 1].x - segs[i].x);
     }
     printf("%llu\n", Ans);
     return 0;
