@@ -70,10 +70,10 @@ void solve()
                 dfs(i, j), cnt_block++;
         }
     }
-    if (xsum == 1 && cnt_block == 1 && cnt_illegal_black <= 1)
-        puts("YES");
+    if (xsum == 1 && cnt_block == 1)
+        puts("Yes");
     else
-        puts("NO");
+        puts("No");
 }
 int main()
 {
