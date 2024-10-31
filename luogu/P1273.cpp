@@ -39,6 +39,7 @@ int dfs(int x)
 }
 int main()
 {
+    memset(dp, ~0x3f, sizeof(dp));
     scanf("%d %d", &n, &m);
     for (int i = 1; i <= n - m; i++)
     {
@@ -53,6 +54,8 @@ int main()
     }
     for (int i = n - m + 1; i <= n; i++)
         scanf("%d", cost + i);
+    for (int i = 1; i <= n; i++)
+        dp[i][0] = 0;
     dfs(1);
     for (int i = m; i >= 0; i--)
         if (dp[1][i] >= 0)
