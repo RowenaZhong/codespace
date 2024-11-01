@@ -54,7 +54,7 @@ int main()
             int x;
             readi(x);
             if(n && x == a[n])
-                ans++;
+                ans += x;
             else
                 a[++n] = x;
         }
