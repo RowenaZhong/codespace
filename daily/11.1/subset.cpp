@@ -38,7 +38,7 @@ inline void writei(T x)
     }
 }
 int n, a[20];
-map<int, vector<int>>mp;
+unordered_map<int, vector<int>>mp;
 set<int>ans;
 int main()
 {
