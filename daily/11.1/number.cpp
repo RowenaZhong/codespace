@@ -39,7 +39,7 @@ inline void writei(T x)
 }
 const int MAXN = 1e5 + 7;
 char s1[MAXN], s2[MAXN];
-int a1[MAXN], a2[MAXN];
+unsigned long long a1[MAXN], a2[MAXN];
 int main()
 {
     freopen("number.in", "r", stdin);
