@@ -79,20 +79,18 @@ const Matrix<a, a, T> operator^(const Matrix<a, a, T> &A, LDim b)
     }
     return R;
 }
-Matrix<10, 10, LDim> F;
-Matrix<10, 1, LDim> T;
+Matrix<16, 16, LDim> F;
+Matrix<16, 1, LDim> T;
 int main()
 {
-    LDim k;
-    cin >> k;
-    for (int i = 0; i <= 9; i++)
-        T[i][0] = 1;
-    for (int i = 0; i < 10; i++)
-        for (int j = 0; j < 10; j++)
-            F[i][j] = (abs(i - j) <= 2);
-    T = (F ^ (k - 1)) * T;
-    LDim Ans(0);
-    for (Dim i = (k > 1); i < 10; i++)
+    LDim N, M, Ans = 0;
+    cin >> N >> M;
+    T[0][0] = 1;
+    for (int i = 0; i < M; i++)
+        F[i][i + 1] = 1;
+    F[M][0] = F[M][M] = 1;
+    T = (F ^ (N + 1)) * T;
+    for (int i = 0; i <= M; i++)
         (Ans += T[i][0]) %= Mod;
     cout << Ans << endl;
     return 0;
