@@ -4,9 +4,3 @@
 !.gitignore
 !*.sh
 !/access
-!*.in
-!*.out
-!*.ans
-!stdin
-!stdout
-!stdans
