@@ -5,3 +5,6 @@
 !*.sh
 !/access
 !*.md
+!/down
+!/down/*
+
