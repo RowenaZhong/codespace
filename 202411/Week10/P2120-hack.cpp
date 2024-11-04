@@ -44,46 +44,29 @@ int n;
 ll x[MAXN], p[MAXN], c[MAXN];
 ll sxp[MAXN],sp[MAXN], f[MAXN];
 int q[MAXN], l, r;
-long double que_k(int p1,int p2)
-{
-    if(p[p1] == p[p2])
-    {
-        if(f[p1] + sxp[p1] == f[p2] + sxp[p2])return 0;
-        else if(f[p1] + sxp[p1] < f[p2] + sxp[p2]) return 1e20;
-        return -1e20;
-    }
-    return (long double)(f[p1] + sxp[p1] - f[p2] - sxp[p2]) / (p[p1] - p[p2]);
-}
 int main()
 {
-    readi(n);
+    cin >> n;
     for(int i = 1; i <= n; i++)
     {
-        readi(x[i]);
-        readi(p[i]);
-        readi(c[i]);
+        cin >> x[i] >> p[i] >> c[i];
         sp[i] = sp[i - 1] + p[i];
-        sxp[i] = sxp[i - 1] + ll(x[i]) * p[i];
+        sxp[i] = sxp[i - 1] + x[i] * p[i];
     }
-    // f_i = min{ f_j - x_i * sp_j + sxp_j} + x_i * sp_i - sxp_i + c_i;
-    // f_j + sxp_i = x_i * sp_j + f_i - x_i * sp_i + sxp_i - c_i
-
-    // X : sp
-    // Y : f - sxp
-    l = r = 1;
-    for(int i = 1; i <= n; i++)
+    f[1] = (p[1] == 0)? 0 : c[1];
+    for(int i = 2; i <= n; i++)
     {
-        while(l < r && que_k(q[l], q[l + 1]) <= (long double)x[i])
-            l++;
-        f[i] = f[q[l]] + x[i] * (sp[i] - sp[q[l]]) - sxp[i] + sxp[q[l]] + c[i];
-        while(l < r && que_k(q[r - 1], q[r]) <= que_k(q[r - 1], i))
-            r--;
-        q[++r] = i;
+        if(p[i] == 0)
+        {
+            f[i] = f[i - 1];
+            continue;
+        }
+        f[i] = LONG_LONG_MAX;
+        for(int j = 1; j < i; j++)
+            f[i] = min(f[i], f[j] + x[i] * (sp[i] - sp[j]) - sxp[i] + sxp[j] + c[i]);
     }
-    ll ans = LONG_LONG_MAX;
-    for(int i = n; i && !p[i + 1]; i--)
-        ans = min(ans, f[i]);
-    writei(ans);
+    
+    writei(f[n]);
     putchar('\n');
     return 0;
 }
