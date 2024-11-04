@@ -76,7 +76,7 @@ int main()
         while(l < r && que_k(q[l], q[l + 1]) <= (long double)x[i])
             l++;
         f[i] = f[q[l]] + x[i] * (sp[i] - sp[q[l]]) - sxp[i] + sxp[q[l]] + c[i];
-        while(l < r && que_k(q[r - 1], q[r]) <= que_k(q[r - 1], i))
+        while(l < r && que_k(q[r - 1], q[r]) >= que_k(q[r - 1], i))
             r--;
         q[++r] = i;
     }
