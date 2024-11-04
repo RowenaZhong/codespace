@@ -39,6 +39,7 @@ inline void writei(T x)
 }
 int n, m;
 int s[5005], t[5005], max_s_i;
+int s[5005], t[5005], max_s_i = 0; // Initialize max_s_i to 0
 int main()
 {
     freopen("lcp.in", "r", stdin);

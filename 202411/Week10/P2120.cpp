@@ -41,9 +41,9 @@ const int MAXN = 1e6 + 7;
 typedef unsigned long long ull;
 typedef long long ll;
 int n;
-int x[MAXN], p[MAXN], c[MAXN];
+ll x[MAXN], p[MAXN], c[MAXN];
 ll sxp[MAXN],sp[MAXN], f[MAXN];
-deque<ull> q;
+int q[MAXN], l, r;
 int main()
 {
     readi(n);
@@ -53,45 +53,27 @@ int main()
         readi(p[i]);
         readi(c[i]);
         sp[i] = sp[i - 1] + p[i];
-        sxp[i] = sxp[i - 1] + ull(x[i]) * p[i];
+        sxp[i] = sxp[i - 1] + ll(x[i]) * p[i];
     }
     // f_i = min{ f_j - x_i * sp_j + sxp_j} + x_i * sp_i - sxp_i + c_i;
     // f_j + sxp_i = x_i * sp_j + f_i - x_i * sp_i + sxp_i - c_i
+
+    // X : sp
+    // Y : f - sxp
+    l = r = 0;
     for(int i = 1; i <= n; i++)
     {
-        if(q.size() == 0)
-        {
-            f[i] = x[i] * sp[i] - sxp[i] + c[i];
-            q.push_back(i);
-            continue;
-        }
-        while(q.size() > 1)
-        {
-            ll px1, px2, py1, py2;
-            px1 = sp[q[0]];
-            px2 = sp[q[1]];
-            py1 = f[q[0]] + sxp[q[0]];
-            py2 = f[q[1]] + sxp[q[1]];
-            if((py2 - py1) / (px2 - px1) < x[i])
-                q.pop_front();
-            else
-                break;
-        }
-        f[i] = f[q[0]]  + sxp[q[0]] - sxp[i] + x[i] * sp[i] - x[i] * sp[q[0]] + c[i];
-        ll px3 = sp[i], py3 = f[i] + sxp[i];
-        while(q.size() > 1)
-        {
-            ll px1, px2, py1, py2;
-            px1 = sp[q[0]];
-            px2 = sp[q[1]];
-            py1 = f[q[0]] + sxp[q[0]];
-            py2 = f[q[1]] + sxp[q[1]];
-            if((py2 - py1) / (px2 - px1) > (py3 - py2) / (px3 - px2))
-                q.pop_back();
-            else
-                break;
-        }
-        q.push_back(i);
+        while(l < r && (f[q[l + 1]] + sxp[q[l + 1]] - f[q[l]] - sxp[q[l]]) <= x[i] * (sp[q[l + 1]] - sp[q[l]]))
+            l++;
+        f[i] = f[q[l]] + x[i] * (sp[i] - sp[j]) - sxp[i] - sxp[q[l]] + c[i];
+        while(l < r && (f[q[r]] + sxp[q[r]] - f[q[r - 1]] - sxp[q[r - 1]]) >= x[i] * (sp[q[r]] - sp[q[r - 1]]))
+            r--;
+        q[++r] = i;
+        if(i == n)
+            break;
+        while(l < r && (f[q[l + 1]] + sxp[q[l + 1]] - f[q[l]] - sxp[q[l]]) >= x[i + 1] * (sp[q[l + 1]] - sp[q[l]]))
+            l++;
+        f[i] = min(f[i], f[q[l]] + x[i + 1] * (sp[q[l]] - sp[i]) + sxp[i] - sxp[q[l]] + c[i])
     }
     ll ans = LONG_LONG_MAX;
     for(int i = n; i && !p[i + 1]; i--)
