@@ -23,19 +23,20 @@ bool bfs()
     q = queue<int>();
     q.push(1);
     d[1] = 1;
+    now[1] = head[1];
     while(q.size())
     {
         int u = q.front();
         q.pop();
-        now[u] = head[u];
-        if(u == n)return true;
         for(int i = head[u]; i; i = nxt[i])
         {
             int v = to[i];
             if(wei[i] && !d[v])
             {
-                d[v] = d[u] + 1;
                 q.push(v);
+                now[v] = head[v];
+                d[v] = d[u] + 1;
+                if(v == n)return true;
             }
         }
     }
@@ -44,17 +45,17 @@ bool bfs()
 int dinic(int x, int flow)
 {
     if(x == n)return flow;
-    int ret = 0, k, rest = flow;
-    for(; now[x]; now[x] = nxt[now[x]]) 
+    int k, rest = flow;
+    for(; now[x] && rest; now[x] = nxt[now[x]]) 
     {
         int v = to[now[x]];
         if(wei[now[x]] && d[v] == d[x] + 1)
         {
             k = dinic(v, min(rest, wei[now[x]]));
-            rest -= k;
+            if(!k)d[v] = 0;
             wei[now[x]] -= k;
             wei[now[x] ^ 1] += k;
-            if(!rest)return flow;
+            rest -= k;
         }
     }
     return flow - rest;
