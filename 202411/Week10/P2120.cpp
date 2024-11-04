@@ -46,13 +46,13 @@ ll sxp[MAXN],sp[MAXN], f[MAXN];
 int q[MAXN], l, r;
 long double que_k(int p1,int p2)
 {
-    if(p[p1] == p[p2])
+    if(sp[p1] == sp[p2])
     {
         if(f[p1] + sxp[p1] == f[p2] + sxp[p2])return 0;
         else if(f[p1] + sxp[p1] < f[p2] + sxp[p2]) return 1e20;
         return -1e20;
     }
-    return (long double)(f[p1] + sxp[p1] - f[p2] - sxp[p2]) / (p[p1] - p[p2]);
+    return (long double)(f[p1] + sxp[p1] - f[p2] - sxp[p2]) / (sp[p1] - sp[p2]);
 }
 int main()
 {
