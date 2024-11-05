@@ -36,20 +36,20 @@ int main(){
     freopen("tri.out","w",stdout);
 //    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     cin>>n>>m;
-    cout<<"test1\n";
+    cerr<<"test1\n";
     for(int i=1;i<=m;++i){
         int u,v;
-        cout<<"here!\n";
+        cerr<<"here!\n";
         cin>>u>>v;//RE here
-        cout<<"here!\n";
+        cerr<<"here!\n";
         White[u].push_back(v);
         White[v].push_back(u);
     }
-    cout<<"test2\n";
+    cerr<<"test2\n";
     for(int i=1;i<=n;++i) sort(White[i].begin(),White[i].end());
-    cout<<"test3\n";
+    cerr<<"test3\n";
     dfs(1,0,-1);
-    cout<<"test4\n";
+    cerr<<"test4\n";
     cout<<ans;
     return 0;
 }
