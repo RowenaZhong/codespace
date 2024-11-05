@@ -1,12 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int MAXN = 205, MAXM = 2007;
+const int MAXN = 205, MAXM = 4007;
 int n, m, x;
 int head[MAXN], to[MAXM], wei[MAXM], nxt[MAXM], now[MAXN], tot = 1;
 /*
  *
  * Highlight!!!
  * 使用 ^1 建立反向边时边要从偶数开始编号
+ * 空间要开两倍大
  *
 */
 void add(int a, int b, int c)
