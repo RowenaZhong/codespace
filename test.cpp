@@ -10,7 +10,7 @@ void dfs(int p,int edge,int color){
     int k=0;
     for(int i=1;i<=n;++i){
         if(i==p) continue;
-        if(i==White[p][k]){
+        if(k<White[p].size() && i==White[p][k]){
             if(color==1){
                 dfs(i,0,-1);
             }
