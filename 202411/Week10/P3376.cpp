@@ -35,7 +35,7 @@ bool bfs()
     }
     return false;
 }
-int dinic(int u, long long flow)
+long long dinic(int u, long long flow)
 {
     if (u == t)
         return flow;
