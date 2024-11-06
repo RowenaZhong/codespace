@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
 
 template <typename T>
 inline void readi(T &x)
@@ -39,16 +38,17 @@ inline void writei(T x)
         p /= 10;
     }
 }
-const int maxn = 1000007;
+typedef long long ll;
+const int MAXN = 1000007;
 
-int n, m, k, aa, bb, fat[maxn], cnt;
-int fir[maxn], to[maxn], nex[maxn], ecnt;
-int son[maxn], dep[maxn], sz[maxn], fa[maxn], top[maxn], val[maxn];
+int n, m, k, aa, bb, fat[MAXN], cnt;
+int fir[MAXN], to[MAXN], nex[MAXN], ecnt;
+int son[MAXN], dep[MAXN], sz[MAXN], fa[MAXN], top[MAXN], val[MAXN];
 
 struct node
 {
     int x, y, z;
-} a[maxn];
+} a[MAXN];
 
 void add_edge(int u, int v)
 {
