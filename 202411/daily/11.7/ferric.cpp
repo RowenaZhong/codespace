@@ -151,7 +151,7 @@ void solve()
         SF = SF + MF;
         MF = MF * F;
     }
-    for(int i = 0; i < n; i++)P[i][i] = 1;
+    for(int i = 0; i < n; i++)P[i][0] = 1;
     for(int i = 0; i < n; i++)readi(A[0][i]);
     Ans = A * SF * P;
     writei(Ans[0][0]);
