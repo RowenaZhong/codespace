@@ -165,5 +165,6 @@ int main()
     T = 1;
     while(T--)
         solve();
+    fclose(stdout);
     return 0;
 }
