@@ -80,8 +80,7 @@ int main()
         for (int j = 1; j <= n; j++) {
             AddEdge(GetIndex(i, j, DOT_IN), GetIndex(i, j, DOT_OUT), 1,
                     A[i][j]);
-            AddEdge(GetIndex(i, j, DOT_IN), GetIndex(i, j, DOT_OUT), k - 1,
-                    A[i][j]);
+            AddEdge(GetIndex(i, j, DOT_IN), GetIndex(i, j, DOT_OUT), k - 1, 0);
         }
     }
     s = GetIndex(1, 1, DOT_IN);
