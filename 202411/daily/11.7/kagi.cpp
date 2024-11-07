@@ -41,7 +41,7 @@ const int MAXN = 1e5 + 5, MAXK = 2e5 + 5;
 int head[MAXN], k[MAXN], arr[MAXK], choice[MAXN], tot = 1;
 inline void solve()
 {
-    int n, m, deadline, lasting_time, lasting_friend;
+    int n, m, deadline, lasting_time = 0, lasting_friend = 0;
     bool possibility = true;
     readi(n);
     readi(m);
@@ -67,15 +67,15 @@ inline void solve()
                         choice[i - lasting_time + 1] ^= 1;
                 }
             }
-            else choice[i]++;
+            else choice[i]++, lasting_time = 1;
         }
-        lasting_friend = arr[head[i]];
+        else lasting_time = 1;
+        lasting_friend = arr[head[i] + choice[i]];
     }
     if(possibility)
     {
         for(int i  = 1; i <= m; i++)
-            if(choice[i])
-                writei(i), putchar(" \n"[i == m]);
+            writei(arr[head[i] + choice[i]]), putchar(" \n"[i == m]);
     }
     else
     {
