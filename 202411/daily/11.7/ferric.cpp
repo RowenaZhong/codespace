@@ -37,124 +37,28 @@ inline void writei(T x)
         p /= 10;
     }
 }
+long long f[2][5002], g[2][5002], a[5002];
+const int Mod = 19260817;
 int n, k;
-long long d[20];
-void dfs(int x, int t)
-{
-    if(t == 0)
-    {
-        d[x]++;
-        return;
-    }
-    if(x == 1)
-    {
-        d[x]++;
-        dfs(x + 1, t - 1);
-    }
-    else if(x == n)
-    {
-        d[x]++;
-        dfs(x - 1, t - 1);
-    }
-    else
-    {
-        d[x] += 2;
-        dfs(x - 1, t - 1);
-        dfs(x + 1, t - 1);
-    }
-}
-typedef unsigned short Dim;
-typedef unsigned long long LDim;
-template <Dim H, Dim W, typename T>
-class Matrix
-{
-public:
-    T **content;
-    Matrix()
-    {
-        this->content = new T *[H];
-        for (Dim i = 0; i < H; i++)
-            this->content[i] = new T[W]();
-    }
-    ~Matrix()
-    {
-        for (Dim i = 0; i < H; i++)
-            delete[] this->content[i];
-        delete[] this->content;
-    }
-    Matrix(const Matrix<H, W, T> &copyfrom)
-    {
-        this->content = new T *[H];
-        for (Dim i = 0; i < H; i++)
-        {
-            this->content[i] = new T[W]();
-            for (Dim j = 0; j < W; j++)
-                this->content[i][j] = copyfrom[i][j];
-        }
-    }
-    const Matrix &operator=(const Matrix<H, W, T> &copyfrom)
-    {
-        for (Dim i = 0; i < H; i++)
-        {
-            for (Dim j = 0; j < W; j++)
-                this->content[i][j] = copyfrom[i][j];
-        }
-        return *this;
-    }
-    T *operator[](Dim h)
-    {
-        return (this->content[h]);
-    }
-    const T *operator[](Dim h) const
-    {
-        return (this->content[h]);
-    }
-};
-const unsigned long long Mod = 19260817;
-template <Dim H, Dim W, Dim M, typename T>
-Matrix<H, W, T> operator*(const Matrix<H, M, T> &A, const Matrix<M, W, T> &B)
-{
-    Matrix<H, W, T> R;
-    for (int i = 0; i < H; i++)
-        for (int j = 0; j < W; j++)
-            for (int k = 0; k < M; k++)
-                R[i][j] = (R[i][j] + A[i][k] * B[k][j] % Mod) % Mod;
-    return R;
-}
-template <Dim H, Dim W, typename T>
-Matrix<H, W, T> operator+(const Matrix<H, W, T> &A, const Matrix<H, W, T> &B)
-{
-    Matrix<H, W, T> R;
-    for (int i = 0; i < H; i++)
-        for (int j = 0; j < W; j++)
-            R[i][j] = (A[i][j] + B[i][j]) % Mod;
-    return R;
-}
-Matrix<1,1,LDim> Ans;
-Matrix<200,200,LDim> F;
-Matrix<200,200,LDim> MF;
-Matrix<200,200,LDim> SF;
-Matrix<200,1,LDim> P;
-Matrix<1,200,LDim>A;
 void solve()
 {
-    readi(n), readi(k);
-    assert(n <= 200);
-    for(int i = 0; i < n; i++)MF[i][i] =  1;
-    for(int i = 0; i < n; i++)
+    readi(n);
+    readi(k);
+    for(int i = 1; i <= n; i++)
+        readi(a[i]),f[0][i] = a[i], g[0][i] = 1;
+    for(int i = 1; i <= k; i++)
     {
-        if(i)F[i][i - 1] = 1;
-        if(i != n - 1)F[i][i + 1] = 1;
+        for(int j = 1; j <= n; j++)
+        {
+            g[i & 1][j] = (g[(i & 1) ^ 1][j - 1] + g[(i & 1) ^ 1][j + 1]) % Mod;
+            f[i & 1][j] = f[(i & 1) ^ 1][j - 1] + f[(i & 1) ^ 1][j + 1] + (a[j] * g[i & 1][j]) % Mod;
+            f[i & 1][j] %= Mod;
+        }
     }
-    for(int i = 0; i <= k; i++)
-    {
-        SF = SF + MF;
-        MF = MF * F;
-    }
-    for(int i = 0; i < n; i++)P[i][0] = 1;
-    for(int i = 0; i < n; i++)readi(A[0][i]);
-    Ans = A * SF * P;
-    writei(Ans[0][0]);
+    long long Ans = 0;
+    for(int i = 1; i <= n; i++)
+        (Ans += f[k & 1][i]) %= Mod;
+    writei(Ans);
     putchar('\n');
 }
 int main()
