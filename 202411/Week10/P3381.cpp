@@ -17,7 +17,7 @@ inline void add_edge(int u, int v, int w, int c)
 inline void add(int u, int v, int w, int c)
 {
     add_edge(u, v, w, c);
-    add_edge(u, v, 0, -c);
+    add_edge(v, u, 0, -c);
 }
 bool spfa()
 {
@@ -32,7 +32,7 @@ bool spfa()
         auto u = q.front();
         q.pop();
         vis[u] = false;
-        for (auto i = head[s]; i; i = nxt[i]) {
+        for (auto i = head[u]; i; i = nxt[i]) {
             auto v = to[i];
             if (wei[i] && dis[v] > dis[u] + cost[i]) {
                 dis[v] = dis[u] + cost[i];
@@ -50,11 +50,11 @@ void update()
     auto u = t;
     while (u != s) {
         auto e = pre[u];
-        sum_cost += cost[e] * incf[t];
         wei[e] -= incf[t];
         wei[e ^ 1] += incf[t];
         u = to[e ^ 1];
     }
+    sum_cost += dis[t] * incf[t];
     sum_flow += incf[t];
 }
 int main()
