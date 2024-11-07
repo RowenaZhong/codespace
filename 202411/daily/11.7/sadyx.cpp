@@ -49,6 +49,7 @@ int main()
     {
         scanf("%s", str);
         len = strlen(str);
+        k = 0;
         bool meet_a = false, possi = true;
         for (int i = 0; i < len; i++)
         {
