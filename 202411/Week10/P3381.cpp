@@ -34,7 +34,7 @@ bool spfa()
         vis[u] = false;
         for (auto i = head[s]; i; i = nxt[i]) {
             auto v = to[i];
-            if (dis[v] > dis[u] + cost[i]) {
+            if (wei[i] && dis[v] > dis[u] + cost[i]) {
                 dis[v] = dis[u] + cost[i];
                 incf[v] = min(incf[u], wei[i]);
                 if (!vis[v])
