@@ -62,7 +62,7 @@ int parseFor()
     }
     valUsing |= 1 << q.front().val;
     q.pop();
-    int innerComplexity = 0;
+    int innerComplexity = INT_MIN;
     while (q.front().type != Code::Type::ENDFOR) {
         auto complexity = parseGeneral();
         if (complexity == -1)
