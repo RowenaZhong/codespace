@@ -54,14 +54,13 @@ queue<Code> q;
 int parseGeneral();
 int parseFor()
 {
-    if (q.front().type != Code::Type::FOR)
-    {
+    if (q.front().type != Code::Type::FOR) {
         // printf("not for:");
         return -1;
     }
-    auto l = q.front().l, r = q.front().r,val=q.front().val;
+    auto l = q.front().l, r = q.front().r, val = q.front().val;
     q.pop();
-    if (valUsing & (1<<val)) {
+    if (valUsing & (1 << val)) {
         // printf("val_using@%c:",q.front().val+'a');
         return -1;
     }
@@ -77,7 +76,7 @@ int parseFor()
     q.pop();
     if (l > r)
         return INT_MIN;
-    if (r == NUM_N&&l!=NUM_N)
+    if (r == NUM_N && l != NUM_N)
         return innerComplexity + 1;
     return innerComplexity;
 }
