@@ -6,4 +6,5 @@
 !/access
 !*.md
 !/down
+/down/*
 !/down/*.zip
