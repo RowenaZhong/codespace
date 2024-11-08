@@ -40,7 +40,7 @@ class Code {
 public:
     enum class Type { RUN, EXIT, ENDFOR, FOR };
     Type type;
-    char val;
+    int val;
     int l, r;
     Code(Type t, char v = 0, int l = 0, int r = 0)
     {
@@ -55,13 +55,17 @@ int parseGeneral();
 int parseFor()
 {
     if (q.front().type != Code::Type::FOR)
-        return -1;
-    auto l = q.front().l, r = q.front().r;
-    if (valUsing & (1 << q.front().val)) {
+    {
+        // printf("not for:");
         return -1;
     }
-    valUsing |= 1 << q.front().val;
+    auto l = q.front().l, r = q.front().r,val=q.front().val;
     q.pop();
+    if (valUsing & (1<<val)) {
+        // printf("val_using@%c:",q.front().val+'a');
+        return -1;
+    }
+    valUsing ^= 1 << val;
     int innerComplexity = INT_MIN;
     while (q.front().type != Code::Type::ENDFOR) {
         auto complexity = parseGeneral();
@@ -69,10 +73,11 @@ int parseFor()
             return -1;
         innerComplexity = max(innerComplexity, complexity);
     }
+    valUsing ^= 1 << val;
     q.pop();
     if (l > r)
         return INT_MIN;
-    if (r == NUM_N)
+    if (r == NUM_N&&l!=NUM_N)
         return innerComplexity + 1;
     return innerComplexity;
 }
@@ -84,13 +89,16 @@ int parseGeneral()
             return 0;
         case Code::Type::EXIT:
             q.pop();
+            // printf("unexpected_exit:");
             return -1;
         case Code::Type::ENDFOR:
             q.pop();
+            // printf("unexpected_end_for:");
             return -1;
         case Code::Type::FOR:
             return parseFor();
         default:
+            // printf("unexpected_token:");
             return -1;
     }
 }
