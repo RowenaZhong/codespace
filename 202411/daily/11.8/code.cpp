@@ -10,8 +10,7 @@ inline void readi(T &x)
         ;
     if (ch == '-')
         f = -f, ch = getchar();
-    while (!feof(stdin) && isdigit(ch))
-    {
+    while (!feof(stdin) && isdigit(ch)) {
         x = (x << 3) + (x << 1) + ch - 0x30;
         ch = getchar();
     }
@@ -20,8 +19,7 @@ inline void readi(T &x)
 template <typename T>
 inline void writei(T x)
 {
-    if (x == 0)
-    {
+    if (x == 0) {
         putchar('0');
         return;
     }
@@ -30,58 +28,57 @@ inline void writei(T x)
     T p = 1;
     while (x / p >= 10)
         p = (p << 3) + (p << 1);
-    while (p)
-    {
+    while (p) {
         putchar(x / p + 0x30);
         x %= p;
         p /= 10;
     }
 }
 unsigned valUsing;
-const int NUM_N=INT_MAX;
-class Code{
+const int NUM_N = INT_MAX;
+class Code {
 public:
-    enum class Type{RUN,EXIT,ENDFOR,FOR};
+    enum class Type { RUN, EXIT, ENDFOR, FOR };
     Type type;
     char val;
-    int l,r;
-    Code(Type t,char v=0,int l=0,int r=0)
+    int l, r;
+    Code(Type t, char v = 0, int l = 0, int r = 0)
     {
-        this->val=v;
-        this->l=l;
-        this->r=r;
-        this->type=t;
+        this->val = v;
+        this->l = l;
+        this->r = r;
+        this->type = t;
     }
 };
-queue<Code>q;
+queue<Code> q;
 int parseGeneral();
 int parseFor()
 {
-    if(q.front().type!=Code::Type::FOR)
+    if (q.front().type != Code::Type::FOR)
         return -1;
-    auto l=q.front().l,r=q.front().r;
-    if(valUsing&(1<<q.front().val))
-    {
+    auto l = q.front().l, r = q.front().r;
+    if (valUsing & (1 << q.front().val)) {
         return -1;
     }
-    valUsing|=1<<q.front().val;
+    valUsing |= 1 << q.front().val;
     q.pop();
-    int innerComplexity=0;
-    while(q.front().type != Code::Type::ENDFOR)
-    {
+    int innerComplexity = 0;
+    while (q.front().type != Code::Type::ENDFOR) {
         auto complexity = parseGeneral();
-        if(complexity==-1)return -1;
-        innerComplexity=max(innerComplexity, complexity);
+        if (complexity == -1)
+            return -1;
+        innerComplexity = max(innerComplexity, complexity);
     }
     q.pop();
-    if(l>r)return INT_MIN;
-    if(r==NUM_N)return innerComplexity+1;
+    if (l > r)
+        return INT_MIN;
+    if (r == NUM_N)
+        return innerComplexity + 1;
     return innerComplexity;
 }
 int parseGeneral()
 {
-    switch(q.front().type)
-    {
+    switch (q.front().type) {
         case Code::Type::RUN:
             q.pop();
             return 0;
@@ -103,53 +100,53 @@ int main()
     freopen("code.in", "r", stdin);
     freopen("code.out", "w", stdout);
     int T;
-    scanf("%d\n",&T);
+    scanf("%d\n", &T);
     char str[100];
-    int val,l,r;
+    int val, l, r;
     char chVal;
-    char strL[20],strR[20];
-    while(T--)
-    {
-        valUsing=0;
-        generalComplexity=0;
-        q=queue<Code>();
-        while(true)
-        {
-            scanf("%[^\n]\n",str);
-            bool isExit=false;
-            switch(*str)
-            {
-                case 'r':q.push(Code(Code::Type::RUN));break;
+    char strL[20], strR[20];
+    while (T--) {
+        valUsing = 0;
+        generalComplexity = 0;
+        q = queue<Code>();
+        while (true) {
+            scanf("%[^\n]\n", str);
+            bool isExit = false;
+            switch (*str) {
+                case 'r':
+                    q.push(Code(Code::Type::RUN));
+                    break;
                 case 'e':
-                    if(str[1]=='x')
-                        q.push(Code(Code::Type::EXIT)),isExit=true;
+                    if (str[1] == 'x')
+                        q.push(Code(Code::Type::EXIT)), isExit = true;
                     else
                         q.push(Code(Code::Type::ENDFOR));
                     break;
                 case 'f':
-                    sscanf(str,"for %c from %s to %s",&chVal,strL,strR);
-                    val=chVal-'a';
-                    l=(strL[0]=='n')?NUM_N:atoi(strL);
-                    r=(strR[0]=='n')?NUM_N:atoi(strR);
-                    q.push(Code(Code::Type::FOR,val,l,r));
+                    sscanf(str, "for %c from %s to %s", &chVal, strL, strR);
+                    val = chVal - 'a';
+                    l = (strL[0] == 'n') ? NUM_N : atoi(strL);
+                    r = (strR[0] == 'n') ? NUM_N : atoi(strR);
+                    q.push(Code(Code::Type::FOR, val, l, r));
                     break;
-                default:break;
+                default:
+                    break;
             }
-            if(isExit)break;
+            if (isExit)
+                break;
         }
-        bool CE=false;
-        while(q.front().type!=Code::Type::EXIT)
-        {
-            auto complexity=parseGeneral();
-            if(complexity==-1)
-            {
+        bool CE = false;
+        while (q.front().type != Code::Type::EXIT) {
+            auto complexity = parseGeneral();
+            if (complexity == -1) {
                 puts("Compile Error");
-                CE=true;
+                CE = true;
                 break;
             }
-            generalComplexity=max(generalComplexity,complexity);
+            generalComplexity = max(generalComplexity, complexity);
         }
-        if(CE) continue;
+        if (CE)
+            continue;
         writei(generalComplexity);
         putchar('\n');
     }
