@@ -10,7 +10,7 @@ inline long long x(int i)
 }
 inline long long y(int i)
 {
-    return g[i] - (long long) s[i] * s[i];
+    return g[i] - s[i] * s[i];
 }
 inline long double calcSlope(int i, int j)
 {
@@ -22,18 +22,19 @@ inline long double calcSlope(int i, int j)
 int main()
 {
     scanf("%lld %lld", &n, &k);
-    for (int i = 1; i <= n; i++) {
+    for (int i = 1; i <= n; i++)
+    {
         scanf("%lld", a + i);
         s[i] = s[i - 1] + a[i];
     }
-    for (int i = 1; i <= k; i++) {
+    for (int i = 1; i <= k; i++)
+    {
         h = t = 0;
         q[0] = 0;
-        h = t = 1;
-        q[1] = 1;
         memcpy(g, f, sizeof(f));
-        for (int j = 1; j <= n; j++) {
-            while (h < t && calcSlope(q[h], q[h + 1]) <= (long double) s[i])
+        for (int j = 1; j <= n; j++)
+        {
+            while (h < t && calcSlope(q[h], q[h + 1]) <= (long double)s[j])
                 h++;
             f[j] = g[q[h]] + s[q[h]] * (s[j] - s[q[h]]);
             pre[j][i] = q[h];
