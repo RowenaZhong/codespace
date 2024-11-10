@@ -37,10 +37,18 @@ inline void writei(T x)
         p /= 10;
     }
 }
-
+vector<int>e[20];
+vector<int>p[20];
 int main()
 {
-    freopen(".in", "r", stdin);
-    freopen(".out", "w", stdout);
+    freopen("mine.in", "r", stdin);
+    freopen("mine.out", "w", stdout);
+    int T,n;
+    readi(T);
+    while(T--)
+    {
+        readi(n);
+        
+    }
     return 0;
 }
