@@ -29,6 +29,7 @@
   - [P2365 任务安排](https://www.luogu.com.cn/problem/P2365)
   - [P10979 任务安排 2](https://www.luogu.com.cn/problem/P10979)
   - [P5785 【SDOI2012】 任务安排](https://www.luogu.com.cn/problem/P5785)
+  - [P3648 【APIO2014】 序列分割](https://www.luogu.com.cn/problem/P3648)
 - 树形dp
   - [P1131 【ZJOI2007】 时态同步](https://www.luogu.com.cn/problem/P1131)
   - [P1273 有线电视网](https://www.luogu.com.cn/problem/P1273)

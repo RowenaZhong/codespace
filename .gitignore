@@ -8,3 +8,5 @@
 !/down
 /down/*
 !/down/*.zip
+!/reserve
+!/reserve/*
