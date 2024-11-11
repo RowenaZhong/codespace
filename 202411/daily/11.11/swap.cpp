@@ -1,10 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define int unsigned long long
+typedef long long ll;
 string s1;
 int m;
-vector<int> pl[10];
-int p10[21];
+vector<ll> pl[10];
+#define int long long
+ll p10[21];
 signed main()
 {
     freopen("swap.in", "r", stdin);
@@ -15,8 +16,8 @@ signed main()
     p10[0] = 1;
     for (int i = 1; i <= 18; i++)
         p10[i] = p10[i - 1] * 10;
-    int sd = 0;
-    int now1, now2;
+    ll sd = 0;
+    ll now1, now2;
     for (int i = 9; i >= 1; i--) {
         for (int j = 1; j <= n; j++)
             if (s1[j] == i + '0')
