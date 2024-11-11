@@ -10,7 +10,8 @@ signed main()
 {
     freopen("swap.in", "r", stdin);
     freopen("swap.out", "w", stdout);
-    cin >> s1 >> m;
+    cin >> s1 ;
+    
     int n = s1.size();
     s1 = " " + s1;
     p10[0] = 1;
