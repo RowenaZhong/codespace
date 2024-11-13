@@ -1,9 +1,11 @@
 # 图论
+
 - 网络流
   - 最大流
     - [P1402 酒店之王](https://www.luogu.com.cn/problem/P1402)
     - [P1343 地震逃生](https://www.luogu.com.cn/problem/P1343)
     - [P2774 方格取数问题](https://www.luogu.com.cn/problem/P2774)
+    - [P1129 【ZJOI2007】 矩阵游戏](https://www.luogu.com.cn/problem/P1129)
   - 费用流
     - [P2045 方格取数加强版](https://www.luogu.com.cn/problem/P2045)
     - [P3381 【模板】最小费用最大流](https://www.luogu.com.cn/problem/P3381)
@@ -20,7 +22,9 @@
   - dijkstra [P4779 【模板】单源最短路径（标准版）](https://www.luogu.com.cn/problem/P4779)
 - 最小生成树
   - [P3366 【模板】最小生成树](https://www.luogu.com.cn/problem/P3366)
+
 # 动态规划
+
 - 线性dp
   - [P11233 【CSP-S 2024】 染色](https://www.luogu.com.cn/problem/P11233)
   - [P1868 饥饿的奶牛](https://www.luogu.com.cn/problem/P1868)
@@ -37,7 +41,9 @@
   - [P1714 切蛋糕](https://www.luogu.com.cn/problem/P1714)
 - 状态压缩
   - [P10447 最短 Hamilton 路径](https://www.luogu.com.cn/problem/P10447)
+
 # 线性代数
+
 - 矩阵加速
   - [P5004 专心OI - 跳房子](https://www.luogu.com.cn/problem/P5004)
   - [P2106 Sam数](https://www.luogu.com.cn/problem/P2106)
@@ -56,7 +62,9 @@
   - [P2455 【SDOI2006】 线性方程组](https://www.luogu.com.cn/problem/P2455)
   - [P4035 【JSOI2008】 球形空间产生器](https://www.luogu.com.cn/problem/P4035)
   - [P4783 【模板】矩阵求逆](https://www.luogu.com.cn/problem/P4783)
+
 # 数据结构
+
 - 树状数组
   - [P3374 【模板】树状数组 1](https://www.luogu.com.cn/problem/P3374)
   - [P3368 【模板】树状数组 2](https://www.luogu.com.cn/problem/P3368)
@@ -85,5 +93,7 @@
   - [P2024 【NOI2001】 食物链](https://www.luogu.com.cn/problem/P2024)
 - Treap
   - [P3369 【模板】普通平衡树](https://www.luogu.com.cn/problem/P3369)
+
 # 二分
+
 - [P3017 【USACO11MAR】Brownie Slicing G](https://www.luogu.com.cn/problem/P3017)
