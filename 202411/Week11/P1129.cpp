@@ -40,7 +40,8 @@ inline void writei(T x)
 
 const int MAXN = 407, MAXM = 4.4e4 + 7, MAXR = 200;
 int head[MAXN], now[MAXN];
-int nxt[MAXM], ver[MAXN], cap[MAXM], dis[MAXM], tot = 1;
+int nxt[MAXM], ver[MAXM], cap[MAXM];
+int dis[MAXN], tot = 1;
 int n, s, t;
 inline void AddSingleEdge(int u, int v, int w)
 {
@@ -87,7 +88,6 @@ int dinic(int u, int flow)
         if (dis[v] == dis[u] + 1 && cap[e])
         {
             auto subFlow = dinic(v, min(cap[e], rest));
-            if(subFlow>1)cerr<<u<<" "<<cap[e]<<endl;
             rest -= subFlow;
             cap[e] -= subFlow;
             cap[e ^ 1] += subFlow;
@@ -133,19 +133,8 @@ int main()
         {
             while (flow = dinic(s, INT_MAX))
                 maxFlow += flow;
-            for(int i=1;i<=dis[t];i++)
-            {
-                cerr<<"dis->"<<i<<endl;
-                for(int k=1;k<=t;k++)
-                {
-                    if(dis[k]==i)
-                    {
-                        cout<<"\t"<<k<<endl;
-                    }
-                }
-            }
         }
-        puts((maxFlow >= n) ? "Yes" : "No");
+        puts((maxFlow == n) ? "Yes" : "No");
     }
 
     return 0;
