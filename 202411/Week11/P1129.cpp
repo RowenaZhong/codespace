@@ -87,6 +87,7 @@ int dinic(int u, int flow)
         if (dis[v] == dis[u] + 1 && cap[e])
         {
             auto subFlow = dinic(v, min(cap[e], rest));
+            if(subFlow>1)cerr<<u<<endl;
             rest -= subFlow;
             cap[e] -= subFlow;
             cap[e ^ 1] += subFlow;
