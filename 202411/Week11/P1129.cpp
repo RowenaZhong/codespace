@@ -1,5 +1,43 @@
 #include <bits/stdc++.h>
 using namespace std;
+template <typename T>
+inline void readi(T &x)
+{
+    T f = 1;
+    x = 0;
+    int ch;
+    while (ch = getchar(), !feof(stdin) && !isdigit(ch) && ch != '-')
+        ;
+    if (ch == '-')
+        f = -f, ch = getchar();
+    while (!feof(stdin) && isdigit(ch))
+    {
+        x = (x << 3) + (x << 1) + ch - 0x30;
+        ch = getchar();
+    }
+    x *= f;
+}
+template <typename T>
+inline void writei(T x)
+{
+    if (x == 0)
+    {
+        putchar('0');
+        return;
+    }
+    if (x < 0)
+        x = -x, putchar('-');
+    T p = 1;
+    while (x / p >= 10)
+        p = (p << 3) + (p << 1);
+    while (p)
+    {
+        putchar(x / p + 0x30);
+        x %= p;
+        p /= 10;
+    }
+}
+
 const int MAXN = 407, MAXM = 4.4e4 + 7, MAXR = 200;
 int head[MAXN], now[MAXN];
 int nxt[MAXM], ver[MAXN], cap[MAXM], dis[MAXM], tot = 1;
@@ -70,13 +108,13 @@ inline int GetCol(int c)
 int main()
 {
     int T;
-    scanf("%d", &T);
+    readi(T);
     s = MAXR * 2 + 1, t = MAXR * 2 + 2;
     while (T--)
     {
         memset(head, 0x00, sizeof(head));
         tot = 1;
-        scanf("%d", &n);
+        readi(n);
         for (int i = 1; i <= n; i++)
             AddEdge(s, GetRow(i), 1), AddEdge(GetCol(i), t, 1);
         for (int i = 1; i <= n; i++)
@@ -84,7 +122,7 @@ int main()
             for (int j = 1; j <= n; j++)
             {
                 int t;
-                scanf("%d", &t);
+                readi(t);
                 if (t)
                     AddEdge(GetRow(i), GetCol(j), 1);
             }
@@ -93,7 +131,7 @@ int main()
         while (bfs())
             while (flow = dinic(s, INT_MAX))
                 maxFlow += flow;
-        puts((maxFlow == n) ? "Yes" : "No");
+        puts((maxFlow >= n) ? "Yes" : "No");
     }
 
     return 0;
