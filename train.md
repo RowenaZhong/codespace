@@ -55,6 +55,7 @@
   - [P10499 开关问题](https://www.luogu.com.cn/problem/P10499)
   - [P2455 【SDOI2006】 线性方程组](https://www.luogu.com.cn/problem/P2455)
   - [P4035 【JSOI2008】 球形空间产生器](https://www.luogu.com.cn/problem/P4035)
+  - [P4783 【模板】矩阵求逆](https://www.luogu.com.cn/problem/P4783)
 # 数据结构
 - 树状数组
   - [P3374 【模板】树状数组 1](https://www.luogu.com.cn/problem/P3374)
