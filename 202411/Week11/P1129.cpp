@@ -38,7 +38,7 @@ inline void writei(T x)
     }
 }
 
-const int MAXN = 407, MAXM = 4.4e4 + 7, MAXR = 200;
+const int MAXN = 407, MAXM = 8.8e4 + 7, MAXR = 200;
 int head[MAXN], now[MAXN];
 int nxt[MAXM], ver[MAXM], cap[MAXM];
 int dis[MAXN], tot = 1;
