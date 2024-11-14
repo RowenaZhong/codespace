@@ -41,6 +41,10 @@ int main()
                     if (hw[l][j - k - 1])
                         f[i][j] = min(f[i][j], f[i + k + 1][l - 1] + 1);
                 }
+                for (int l = i + k + 1; l <= j - k - 1; l++) {
+                    if (hw[i + k + 1][l])
+                        f[i][j] = min(f[i][j], f[l + 1][j + k - 1] + 1);
+                }
             }
         }
     }
