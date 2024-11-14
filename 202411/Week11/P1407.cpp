@@ -8,30 +8,32 @@ void AddEdge(int u, int v)
 {
     totEdge++, nxt[totEdge] = head[u], head[u] = totEdge, ver[totEdge] = v;
 }
-int dfn[MAXN], low[MAXN], dfntot = 1, stk[MAXN], stktot;
+int dfn[MAXN], low[MAXN], dfntot = 1, stk[MAXN], stktot, ins[MAXN];
 int scctot;
 void tarjan(int u)
 {
     dfn[u] = low[u] = dfntot++;
-    stk[stktot++] = u;
+    stk[++stktot] = u;
+    ins[u] = true;
     for (auto e = head[u]; e; e = nxt[e])
     {
         auto v = ver[e];
         if (dfn[v])
-            low[u] = min(low[u], dfn[v]);
+            if (ins[v])
+                low[u] = min(low[u], dfn[v]);
+            else
+                ;
         else
             tarjan(v), low[u] = min(low[u], low[v]);
     }
     if (dfn[u] == low[u])
     {
         scctot++;
-        while (stk[stktot - 1] != u)
+        do
         {
-            scc[stk[stktot - 1]] = scctot;
-            stktot--;
-        }
-        scc[stk[stktot - 1]] = scctot;
-        stktot--;
+            scc[stk[stktot]] = scctot;
+            ins[stk[stktot]] = false;
+        } while (stk[stktot--] != u);
     }
 }
 int main()
@@ -42,8 +44,8 @@ int main()
     for (int i = 1; i <= n; i++)
     {
         cin >> str1 >> str2;
-        person[str1] = i * 2 - 1, person[str2] = i * 2;
-        AddEdge(i * 2 - 1, i * 2);
+        person[str1] = i, person[str2] = i + n;
+        AddEdge(i, i + n);
     }
     cin >> m;
     for (int i = 1; i <= m; i++)
@@ -51,13 +53,10 @@ int main()
         cin >> str1 >> str2;
         AddEdge(person[str2], person[str1]);
     }
+    for (int i = 1; i <= n * 2; i++)
+        if (!dfn[i])
+            tarjan(i);
     for (int i = 1; i <= n; i++)
-    {
-        if (!dfn[i * 2 - 1])
-            tarjan(i * 2 - 1);
-        if (!dfn[i * 2])
-            tarjan(i * 2);
-        puts(scc[i * 2 - 1] == scc[i * 2] ? "Unsafe" : "Safe");
-    }
+        puts(scc[i] == scc[i + n] ? "Unsafe" : "Safe");
     return 0;
 }

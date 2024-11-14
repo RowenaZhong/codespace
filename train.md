@@ -15,6 +15,7 @@
   - [P3387 【模板】缩点](https://www.luogu.com.cn/problem/P3387)
   - [P4782 【模板】2-SAT](https://www.luogu.com.cn/problem/P4782)
   - [B3609 【图论与代数结构 701】 强连通分量](https://www.luogu.com.cn/problem/B3609)
+  - [P1407 【国家集训队】 稳定婚姻](https://www.luogu.com.cn/problem/P1407)
 - 拓扑排序
   - [P1038 【NOIP2003 提高组】 神经网络](https://www.luogu.com.cn/problem/P1038)
   - [P1113 杂务](https://www.luogu.com.cn/problem/P1113)
