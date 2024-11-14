@@ -6,6 +6,7 @@
     - [P1343 地震逃生](https://www.luogu.com.cn/problem/P1343)
     - [P2774 方格取数问题](https://www.luogu.com.cn/problem/P2774)
     - [P1129 【ZJOI2007】 矩阵游戏](https://www.luogu.com.cn/problem/P1129)
+    - [P1231 教辅的组成](https://www.luogu.com.cn/problem/P1231)
   - 费用流
     - [P2045 方格取数加强版](https://www.luogu.com.cn/problem/P2045)
     - [P3381 【模板】最小费用最大流](https://www.luogu.com.cn/problem/P3381)
