@@ -10,3 +10,4 @@
 !/down/*.zip
 !/reserve
 !/reserve/*
+!*.ipynb
