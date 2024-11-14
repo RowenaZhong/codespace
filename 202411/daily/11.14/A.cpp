@@ -159,7 +159,7 @@ int main()
             continue;
         }
         Attempt(ROT_R);
-        puts("No");
+        puts("NO");
     }
     return 0;
 }
