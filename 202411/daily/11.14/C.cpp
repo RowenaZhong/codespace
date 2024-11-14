@@ -10,8 +10,7 @@ inline void readi(T &x)
         ;
     if (ch == '-')
         f = -f, ch = getchar();
-    while (!feof(stdin) && isdigit(ch))
-    {
+    while (!feof(stdin) && isdigit(ch)) {
         x = (x << 3) + (x << 1) + ch - 0x30;
         ch = getchar();
     }
@@ -20,8 +19,7 @@ inline void readi(T &x)
 template <typename T>
 inline void writei(T x)
 {
-    if (x == 0)
-    {
+    if (x == 0) {
         putchar('0');
         return;
     }
@@ -30,19 +28,17 @@ inline void writei(T x)
     T p = 1;
     while (x / p >= 10)
         p = (p << 3) + (p << 1);
-    while (p)
-    {
+    while (p) {
         putchar(x / p + 0x30);
         x %= p;
         p /= 10;
     }
 }
-#define lowbit(x) (x)&(-x)
+#define lowbit(x) (x) & (-x)
 inline int cnt1(long long x)
 {
     int ans = 0;
-    while(x)
-    {
+    while (x) {
         x -= lowbit(x);
         ans++;
     }
@@ -55,27 +51,25 @@ int main()
     freopen("C.out", "w", stdout);
     int T;
     readi(T);
-    while(T--)
-    {
+    while (T--) {
         long long n;
         readi(n);
         int ans = 999;
-        for(int i = 1; i <= 1e7; i++)
-        {
-            ans=min(ans,cnt1(n*i));
-            if(ans<2)break;
+        for (int i = 1; i <= 1e7; i++) {
+            ans = min(ans, cnt1(n * i));
+            if (ans < 2)
+                break;
         }
-        #ifdef GDB
-            printf("%lld\t:\t%d\t@",n,ans);
-        for(int i = 1; i <= 1e7; i++)
-            if(cnt1(n*i)==ans)
-            {
-                printf("%d",i);
+#ifdef GDB
+        printf("%lld\t:\t%d\t@", n, ans);
+        for (int i = 1; i <= 1e7; i++)
+            if (cnt1(n * i) == ans) {
+                printf("%d", i);
                 break;
             }
-        #else
+#else
         writei(ans);
-        #endif
+#endif
         putchar('\n');
     }
     return 0;
