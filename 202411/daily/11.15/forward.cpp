@@ -49,26 +49,24 @@ inline void writel(T x, Args... args)
     putchar(" \n"[sizeof...(args) == 0]);
     writel(args...);
 }
-int sumAnd[5002],sumXor[5002],n,a[5002];
+int sumAnd[5002], sumXor[5002], n, a[5002];
 int main()
 {
     freopen("forward.in", "r", stdin);
     freopen("forward.out", "w", stdout);
     readi(n);
-    for(int i=1;i<=n;i++)
-    {
+    for (int i = 1; i <= n; i++) {
         readi(a[i]);
     }
-    long long ans=0;
-    for(int l=1;l<=n;l++)
-    {
-        sumAnd[l-1]=INT_MAX;
-        sumXor[l-1]=0;
-        for(int r=l;r<=n;r++)
-        {
-            sumAnd[r]=sumAnd[r-1]&a[r];
-            sumXor[r]=sumXor[r-1]^a[r];
-            if(sumAnd[r]==sumXor[r])ans++;
+    long long ans = 0;
+    for (int l = 1; l <= n; l++) {
+        sumAnd[l - 1] = INT_MAX;
+        sumXor[l - 1] = 0;
+        for (int r = l; r <= n; r++) {
+            sumAnd[r] = sumAnd[r - 1] & a[r];
+            sumXor[r] = sumXor[r - 1] ^ a[r];
+            if (sumAnd[r] == sumXor[r])
+                ans++;
         }
     }
     writel(ans);

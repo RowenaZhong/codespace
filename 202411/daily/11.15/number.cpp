@@ -51,33 +51,29 @@ inline void writel(T x, Args... args)
 }
 int main()
 {
-    long long T,n;
+    long long T, n;
     freopen("number.in", "r", stdin);
     freopen("number.out", "w", stdout);
     readi(T);
-    while(T--)
-    {
-        readi( n);
-        if(n%4)
-        {
+    while (T--) {
+        readi(n);
+        if (n % 4) {
             puts("No");
             continue;
         }
-        long long s1=0,s2=0;
-        for(long long i=sqrt(n);i;i--)
-        {
-            if(n%i == 0)
-            {
-                if(s1 == 0)s1=i+n/i;
-                else
-                {
-                    s2=i+n/i;
+        long long s1 = 0, s2 = 0;
+        for (long long i = sqrt(n); i; i--) {
+            if (n % i == 0) {
+                if (s1 == 0)
+                    s1 = i + n / i;
+                else {
+                    s2 = i + n / i;
                     break;
                 }
             }
         }
         // writel(s1,s2);
-        puts((s1==s2-1)?"Yes":"No");
+        puts((s1 == s2 - 1) ? "Yes" : "No");
     }
     return 0;
 }
