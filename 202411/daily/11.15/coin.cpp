@@ -50,10 +50,25 @@ inline void writel(T x,Args ...args)
     putchar(" \n"[sizeof...(args)==0]);
     writel(args...);
 }
-
+const int MAXN=2007;
+long long dp[MAXN],c[MAXN],y[MAXN],a[MAXN],sumA[MAXN],ans=0;
+int n,m;
 int main()
 {
-    freopen(".in", "r", stdin);
-    freopen(".out", "w", stdout);
+    freopen("coin.in", "r", stdin);
+    freopen("coin.out", "w", stdout);
+    readl(n,m);
+    for(int i=1;i<=n;i++)readi(a[i]),sumA[i]=sumA[i-1]+a[i];
+    for(int i=1;i<=m;i++)readl(c[i],y[i]);
+    dp[0]=0;
+    for(int i=1;i<=n;i++)
+    {
+        dp[i]=dp[i-1]+a[i];
+        for(int j=1;j<=m;j++)
+            if(i>=c[j])
+                dp[i]=max(dp[i],dp[i - c[j] - 1] + y[j] + sumA[i] - sumA[i - c[j]]);
+        ans=max(ans,dp[i]);
+    }
+    writei(ans);
     return 0;
 }
