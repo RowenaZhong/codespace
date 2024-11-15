@@ -16,6 +16,7 @@ inline void readi(T &x)
     }
     x *= f;
 }
+inline void readl() {}
 template <typename T, typename... Args>
 inline void readl(T &x, Args &...args)
 {
@@ -40,6 +41,7 @@ inline void writei(T x)
         p /= 10;
     }
 }
+inline void writel() {}
 template <typename T, typename... Args>
 inline void writel(T x, Args... args)
 {
