@@ -51,7 +51,7 @@ inline void writel(T x, Args... args)
 }
 const int MAXN = 2007;
 long long dp[MAXN], a[MAXN], sumA[MAXN], ans = 0;
-pair<long long,long long>pr[MAXN];
+pair<long long, long long> pr[MAXN];
 int n, m;
 int main()
 {
@@ -63,14 +63,15 @@ int main()
     for (int i = 1; i <= m; i++)
         readl(pr[i].first, pr[i].second);
     sort(pr + 1, pr + m + 1);
-    for(int i = 1; i <= m; i++) 
+    for (int i = 1; i <= m; i++)
         pr[i].second += pr[i - 1].second;
     dp[0] = 0;
     for (int i = 1; i <= n; i++) {
         dp[i] = dp[i - 1] + a[i];
-        for (int j = 1; j <= m&&pr[j].first<=i; j++)
-                dp[i] = max(dp[i],
-                                     ((pr[j].first<i)?dp[i - pr[j].first - 1]:0) + pr[j].second + sumA[i] - sumA[i - pr[j].first]);
+        for (int j = 1; j <= m && pr[j].first <= i; j++)
+            dp[i] =
+                max(dp[i], ((pr[j].first < i) ? dp[i - pr[j].first - 1] : 0) +
+                               pr[j].second + sumA[i] - sumA[i - pr[j].first]);
         ans = max(ans, dp[i]);
     }
     writel(ans);
