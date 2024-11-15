@@ -50,7 +50,8 @@ inline void writel(T x, Args... args)
     writel(args...);
 }
 const int MAXN = 2007;
-long long dp[MAXN], c[MAXN], y[MAXN], a[MAXN], sumA[MAXN], ans = 0;
+long long dp[MAXN], a[MAXN], sumA[MAXN], ans = 0;
+pair<long long,long long>pr[MAXN];
 int n, m;
 int main()
 {
@@ -60,16 +61,18 @@ int main()
     for (int i = 1; i <= n; i++)
         readi(a[i]), sumA[i] = sumA[i - 1] + a[i];
     for (int i = 1; i <= m; i++)
-        readl(c[i], y[i]);
+        readl(pr[i].first, pr[i].second);
+    sort(pr + 1, pr + m + 1);
+    for(int i = 1; i <= m; i++) 
+        pr[i].second += pr[i - 1].second;
     dp[0] = 0;
     for (int i = 1; i <= n; i++) {
         dp[i] = dp[i - 1] + a[i];
-        for (int j = 1; j <= m; j++)
-            if (i >= c[j])
+        for (int j = 1; j <= m&&pr[j].first<=i; j++)
                 dp[i] = max(dp[i],
-                            dp[i - c[j] - 1] + y[j] + sumA[i] - sumA[i - c[j]]);
+                                     ((pr[j].first<i)?dp[i - pr[j].first - 1]:0) + pr[j].second + sumA[i] - sumA[i - pr[j].first]);
         ans = max(ans, dp[i]);
     }
-    writei(ans);
+    writel(ans);
     return 0;
 }
