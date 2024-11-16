@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int MAXN = 1e5 + 7, NON = 0;
+// const int MAXN = 1e3 + 7, NON = 0;
 int n;
 int fa[MAXN], dep[MAXN], size[MAXN];
 int head[MAXN], nxt[MAXN], ver[MAXN], tot; // childs
@@ -28,8 +29,9 @@ void Dfs2(int u, int t)
     dfn[u] = ++dfntot;
     rnk[dfntot] = u;
     top[u] = t;
-    if (hson[u])
-        Dfs2(hson[u], t);
+    if (!hson[u])
+        return;
+    Dfs2(hson[u], t);
     for (auto e = head[u]; e; e = nxt[e])
     {
         auto v = ver[e];
@@ -46,7 +48,7 @@ void spread(int l, int r, int p)
         auto mid = l + r >> 1;
         if (lazy[p] == INSTALLED)
             sum[p * 2] = mid - l + 1,
-                    sum[p * 2 + 1] += r - mid;
+                    sum[p * 2 + 1] = r - mid;
         else
             sum[p * 2] = sum[p * 2 + 1] = 0;
         lazy[p * 2] = lazy[p];
@@ -114,7 +116,6 @@ void RemoveSubTree(int u)
 }
 int main()
 {
-    freopen("stdin", "r", stdin);
     scanf("%d", &n);
     for (int v = 2; v <= n; v++)
     {
