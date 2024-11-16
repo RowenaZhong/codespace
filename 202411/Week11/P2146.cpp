@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int MAXN = 1e5 + 7, NON = MAXN - 1;
+const int MAXN = 1e5 + 7, NON = 0;
 int n;
 int fa[MAXN], dep[MAXN], size[MAXN];
 int head[MAXN], nxt[MAXN], ver[MAXN], tot; // childs
@@ -114,18 +114,18 @@ void RemoveSubTree(int u)
 }
 int main()
 {
+    freopen("stdin", "r", stdin);
     scanf("%d", &n);
-    n--;
-    for (int v = 1; v <= n; v++)
+    for (int v = 2; v <= n; v++)
     {
         int u;
         scanf("%d", &u);
+        u++;
         AddEdge(u, v);
         fa[v] = u;
     }
-    fa[0] = NON;
-    Dfs1(0);
-    Dfs2(0, 0);
+    Dfs1(1);
+    Dfs2(1, 1);
     int q;
     scanf("%d", &q);
     while (q--)
@@ -133,6 +133,7 @@ int main()
         char str[15];
         int u;
         scanf("%s %d", str, &u);
+        u++;
         if (str[0] == 'i')
         {
             printf("%d\n", dep[u] - QueryList(u));
