@@ -49,12 +49,12 @@ inline void writel(T x, Args... args)
     putchar(" \n"[sizeof...(args) == 0]);
     writel(args...);
 }
-const int MAXN=800;
+const int MAXN = 800;
 typedef unsigned long long Data;
 int n;
-Data a[MAXN],ans;
+Data a[MAXN], ans;
 priority_queue<Data, vector<Data>, greater<Data>> q;
-const Data SHORT_INTERVAL=1,LONG_INTERVAL=2;
+const Data SHORT_INTERVAL = 1, LONG_INTERVAL = 2;
 int main()
 {
     freopen("telegram.in", "r", stdin);
@@ -62,14 +62,13 @@ int main()
     readi(n);
     for (int i = 1; i <= n; i++)
         readi(a[i]), q.push(a[i]);
-    while(q.size() > 1)
-    {
+    while (q.size() > 1) {
         Data x = q.top();
         q.pop();
         Data y = q.top();
         q.pop();
         q.push(x + y);
-        ans+=x*LONG_INTERVAL+y*SHORT_INTERVAL;
+        ans += x * LONG_INTERVAL + y * SHORT_INTERVAL;
     }
     writel(ans);
     return 0;
