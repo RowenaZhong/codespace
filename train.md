@@ -24,6 +24,8 @@
   - dijkstra [P4779 【模板】单源最短路径（标准版）](https://www.luogu.com.cn/problem/P4779)
 - 最小生成树
   - [P3366 【模板】最小生成树](https://www.luogu.com.cn/problem/P3366)
+- 树链剖分
+  - [P3384 【模板】重链剖分/树链剖分](https://www.luogu.com.cn/problem/P3384)
 
 # 动态规划
 
