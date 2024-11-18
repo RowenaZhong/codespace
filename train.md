@@ -27,6 +27,7 @@
 - 树链剖分
   - [P3384 【模板】重链剖分/树链剖分](https://www.luogu.com.cn/problem/P3384)
   - [P2146 【NOI2015】 软件包管理器](https://www.luogu.com.cn/problem/P2146)
+  - [P2590 【ZJOI2008】 树的统计](https://www.luogu.com.cn/problem/P2590)
 
 # 动态规划
 
