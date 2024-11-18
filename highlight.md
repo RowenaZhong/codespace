@@ -6,6 +6,7 @@
   - $readi / writei > scanf / printf > cin / cout$
 - $vector$ 返回一个元素为$vector$\<$T$>{$x$}，大括号不是~~小括号~~
 - 十年OI一场空，不开$long$ $long$见祖宗
+- $luogu$ 关 $freopen$
 
 ## 图论
 
@@ -23,6 +24,8 @@
   - 割点根要特判($child > 2$)
   - 2-SAT 染色用 $scc_i > scc_{i+n}$ ，而不是用 $dfn_i > dfn_{i+n}$
   - $tarjan$ 和 $check$ 最好开两个循环
+- 树链剖分
+  - 比较 $dfn_{top_u}$ 和 $dfn_{top_v}$ ， 而非 $dfn_u$ 和 $dfn_v$
 
 ## $dp$
 
@@ -42,5 +45,5 @@
 - 四倍空间
 - $lazy$ $tag$
   - 记得 $spread$
-- $change$ 更新子结点后记得更新当前节点 $data$
+- **$change$ 更新子结点后记得更新当前节点 **$data$
 - 边界条件为 $l \le seg[node].l \wedge seg[node].r \le r$ , 不是 $seg[node].l == seg[node].r$
