@@ -22,7 +22,7 @@ int main() {
                 selected[x]=true;
             }
             int cont=0;
-            for(int i=20;i>=0;i--)
+            for(int i=1;i<=20;i++)
             {
                 if(selected[i])cont++;
                 else
