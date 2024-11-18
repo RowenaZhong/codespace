@@ -24,7 +24,8 @@ public:
     }
     Node()
     {
-        this->max = this->sum = 0;
+        this->sum = 0;
+        this->max = -0x37373737;
     }
 };
 Node nodes[MAXN << 2];
