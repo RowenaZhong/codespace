@@ -56,8 +56,8 @@ const int MAXN=2e6+7;
 bool doorOpenedHistory[MAXN];
 bool doorOpened[MAXN];
 bool buttonPressed[MAXN];
-unsigned long long doorPosition[MAXN];
-unsigned long long buttonPosition[MAXN];
+int doorPosition[MAXN];
+int buttonPosition[MAXN];
 int n, cntDoor, cntButton;
 void dfs()
 {
@@ -66,9 +66,20 @@ void dfs()
         if(buttonPressed[i]==false)
         {
             buttonPressed[i]=true;
-            int x=lower_bound(doorPosition+1,doorPosition+cntDoor+1,buttonPosition[i])-1;
-            if(doorPosition[x+1]+doorPosition[x]<buttonPosition[i]*2)x++;
-            doorOpened[x]
+            int l=lower_bound(doorPosition+1,doorPosition+cntDoor+1,buttonPosition[i])-doorPosition-1;
+            auto r=l+1;
+            int x;
+            while(l&&doorOpened[l])l--;
+            while(r<=cntDoor&&doorOpened[r])r++;
+            if(doorOpened[l]&&doorOpened[r])return;
+            if(doorOpened[l])x=r;
+            else if(doorOpened[r])x=l;
+            else if(doorPosition[l]+doorPosition[r]>=buttonPosition[i])x=l;
+            else x=r;
+            doorOpened[x]=doorOpenedHistory[x]=true;
+            dfs();
+            doorOpened[x]=false;
+            buttonPressed[i]=false;
         }
     }
 }
@@ -76,18 +87,16 @@ int main()
 {
     freopen("door.in", "r", stdin);
     freopen("door.out", "w", stdout);
-    readi(n);
+    IO::readi(n);
     for(int i=1;i<=n;i++)
     {
         int type,pos;
-        readl(type,pos);
+        IO::readl(type,pos);
         if(type==1)doorPosition[++cntDoor]=pos;
         else buttonPosition[++cntButton]=pos;
     }
-    doorPosition[0]=-1e9;
-    doorPosition[cntDoor+1]=1e10;
     dfs();
-    for(int i=1;i<=cntButton;i++)
-        writel((int)buttonPosition[i]);
+    for(int i=1;i<=cntDoor;i++)
+        IO::writei((int)doorOpenedHistory[i]);
     return 0;
 }
