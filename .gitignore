@@ -6,8 +6,7 @@
 !/access
 !*.md
 !/down
-/down/*
-!/down/*.zip
+!/down/*
 !/reserve
 !/reserve/*
 !*.ipynb
