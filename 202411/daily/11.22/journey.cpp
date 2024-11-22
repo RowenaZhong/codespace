@@ -68,6 +68,17 @@ ll power(ll a, ll b, ll p)
     }
     return res;
 }
+ll power(ll a, ll b)
+{
+    ll res = 1;
+    while (b) {
+        if (b & 1)
+            res = res * a;
+        a = a * a;
+        b >>= 1;
+    }
+    return res;
+}
 inline void solve()
 {
     IO::readl(a, b, n);
@@ -79,34 +90,23 @@ inline void solve()
         return;
     }
     ll ans = cnt * n;
-    ans1 = ans2 = 1;
-    ll d = n;
-    for (; d; d >>= 1) {
-        if (d & 1)
-            ans1 *= a;
-        a *= a;
-    }
-    d = n;
-    for (; d; d >>= 1) {
-        if (d & 1)
-            ans2 *= b;
-        b *= b;
-    }
+	ans1=power(a,n);
+	ans2=power(b,n);
     for (int i = 0; i <= 63; i++) {
-        if ((ans1 >> i & 1) ^ (ans2 >> i & 1)) {
+        if (((ans1 >> i) & 1) ^ ((ans2 >> i) & 1)) {
             ans += i;
             break;
         }
     }
     IO::writel(power(2, ans, p));
 }
-signed main()
+int main()
 {
     freopen("journey.in", "r", stdin);
     freopen("journey.out", "w", stdout);
-    int t;
-    IO::readi(t);
-    while (t--)
+    int T;
+    IO::readi(T);
+    while (T--)
         solve();
     return 0;
 }
