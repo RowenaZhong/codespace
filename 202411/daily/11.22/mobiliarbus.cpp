@@ -108,71 +108,71 @@ int main()
     {
         IO::readi(a[i]),cnt[a[i]]++;
     }
-    // if(n<=1000&&k<=1000)
-    // {
-    //     int cont1 = 0;
-    //     for (int i=1;i<=n&&k;i++)
-    //     {
-    //         int j;
-    //         switch(a[i])
-    //         {
-    //             case 0:
-    //                 j=i-1;
-    //                 while(j&&a[j]==1&&k)
-    //                 {
-    //                     swap(a[j],a[j+1]);
-    //                     k--;
-    //                     j--;
-    //                 }
-    //                 break;
-    //             case 1:
-    //                 j=l2;
-    //                 for(j;j<=cnt2;j++)
-    //                 {
-    //                     if(i-pos2[j]<=k)
-    //                     {
-    //                         k-=i-pos2[j];
-    //                         for(int p=i-1;p>=pos2[j];p--)
-    //                             swap(a[p],a[p+1]);
-    //                         for(int p=j;p<=cnt2;p++)
-    //                             pos2[p]++;
-    //                         break;
-    //                     }
-    //                 }
-    //                 l2=j;
-    //                 break;
-    //             case 2:
-    //                 pos2[++cnt2]=i;
-    //                 break;
-    //         }
-    //     }
-    //     for(int i=1;i<=n;i++)
-    //     {
-    //         IO::writei(a[i]);
-    //         putchar(" \n"[i==n]);
-    //     }
-    //     return 0;
-    // }
-    // if(n*n<=k)
-    // {
-    //     int cnt0=0;
-    //     int first2=0;
-    //     for(int i=1;i<=n;i++)
-    //     {
-    //         if(a[i]==2){first2=i;break;}
-    //         if(a[i]==0)cnt0++;
-    //     }
-    //     for(int i=1;i<=cnt0;i++)
-    //         putchar('0'),putchar(' ');
-    //     for(int i=1;i<=cnt[1];i++)
-    //         putchar('1'),putchar(' ');
-    //     for(int i=first2;i<=n;i++)
-    //     {
-    //         if(a[i]!=1)putchar(a[i]+0x30),putchar(" \n"[i==n]);
-    //     }
-    //     putchar('\n');
-    //     return 0;
-    // }
+    if(n<=1000&&k<=1000)
+    {
+        int cont1 = 0;
+        for (int i=1;i<=n&&k;i++)
+        {
+            int j;
+            switch(a[i])
+            {
+                case 0:
+                    j=i-1;
+                    while(j&&a[j]==1&&k)
+                    {
+                        swap(a[j],a[j+1]);
+                        k--;
+                        j--;
+                    }
+                    break;
+                case 1:
+                    j=l2;
+                    for(j;j<=cnt2;j++)
+                    {
+                        if(i-pos2[j]<=k)
+                        {
+                            k-=i-pos2[j];
+                            for(int p=i-1;p>=pos2[j];p--)
+                                swap(a[p],a[p+1]);
+                            for(int p=j;p<=cnt2;p++)
+                                pos2[p]++;
+                            break;
+                        }
+                    }
+                    l2=j;
+                    break;
+                case 2:
+                    pos2[++cnt2]=i;
+                    break;
+            }
+        }
+        for(int i=1;i<=n;i++)
+        {
+            IO::writei(a[i]);
+            putchar(" \n"[i==n]);
+        }
+        return 0;
+    }
+    if(n*n<=k)
+    {
+        int cnt0=0;
+        int first2=0;
+        for(int i=1;i<=n;i++)
+        {
+            if(a[i]==2){first2=i;break;}
+            if(a[i]==0)cnt0++;
+        }
+        for(int i=1;i<=cnt0;i++)
+            putchar('0'),putchar(' ');
+        for(int i=1;i<=cnt[1];i++)
+            putchar('1'),putchar(' ');
+        for(int i=first2;i<=n;i++)
+        {
+            if(a[i]!=1)putchar(a[i]+0x30),putchar(" \n"[i==n]);
+        }
+        putchar('\n');
+        return 0;
+    }
     if(cnt[2]==0)
     {
         for(int i=1;i<=n;i++)
