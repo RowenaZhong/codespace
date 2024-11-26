@@ -95,7 +95,6 @@ namespace temp
 /* Accepted */
 void Spj1()
 {
-    // TODO n<=19 O(n*2^n
     long long ans = LONG_LONG_MAX;
     for (int i = 0; i < (1 << n); i++)
     {
@@ -149,7 +148,6 @@ int dfs(int x)
 }
 void Spj4()
 {
-    // TODO count in tree O(n)
     dfs(1);
     IO::writel(ans);
 }

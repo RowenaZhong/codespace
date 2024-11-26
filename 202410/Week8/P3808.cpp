@@ -50,7 +50,7 @@ namespace AC
                 {
                     nodes[nodes[t].son[i]].fail = nodes[nodes[t].fail].son[i];
                     nodes[nodes[nodes[t].fail].son[i]].deg++;
-                    que.push(nodes[t].son[i]); // TODO Notice
+                    que.push(nodes[t].son[i]);
                 }
                 else
                     nodes[t].son[i] = nodes[nodes[t].fail].son[i];
