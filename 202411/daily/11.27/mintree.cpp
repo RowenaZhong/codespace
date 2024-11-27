@@ -68,6 +68,7 @@ void AddEdge(int u, int v, int w)
 int top[MAXN];
 int GetTop(int x)
 {
+    // cerr << boolalpha << (top[x] == x) << endl;
     return top[x] == x ? x : top[x] = GetTop(top[x]);
 }
 int fa[MAXN], dep[MAXN], faw[MAXN];
@@ -119,12 +120,12 @@ int main()
         {
             u = tu, v = tv;
             if (dep[u] < dep[v])
-                swap(u, v);
+                swap(u, v), swap(tu, tv);
             while (dep[u] > dep[v])
             {
                 if (faw[u] > w)
                     ans += faw[u] - w, faw[u] = w;
-                top[u] = tu;
+                top[u] = fa[u];
                 u = fa[u];
             }
             while (u != v)
@@ -133,7 +134,7 @@ int main()
                     ans += faw[u] - w, faw[u] = w;
                 if (faw[v] > w)
                     ans += faw[v] - w, faw[v] = w;
-                top[u] = tu, top[v] = tv;
+                top[u] = fa[u], top[v] = fa[v];
                 u = fa[u], v = fa[v];
             }
             top[tu] = top[tv] = u;
