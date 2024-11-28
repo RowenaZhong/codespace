@@ -7,16 +7,18 @@ bool cmp(string a, string b)
     return (a + b) > (b + a);
 }
 const int MOD = 998244353;
+int n;
 int main()
 {
     freopen("D-Test.in", "r", stdin);
     freopen("D-Test.out", "w", stdout);
     getline(cin, str[0]);
-    for (int i = 1; i < str[0].size(); i++)
+    n = str[0].size();
+    for (int i = 1; i < n; i++)
         str[i] = str[i - 1],
         str[i].pop_back();
-    sort(str, str + str[0].size(), cmp);
-    for (int i = 0; i < str[0].size(); i++)
+    sort(str, str + n, cmp);
+    for (int i = 0; i < n; i++)
         cout << str[i] << endl;
     return 0;
 }
