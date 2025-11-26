@@ -6,14 +6,14 @@ inline void readi(T &x)
     T f = 1;
     x = 0;
     int ch;
-    while (ch = getchar(), !feof(stdin) && !isdigit(ch) && ch != '-')
+    while (ch = getchar_unlocked(), !isdigit(ch) && ch != '-')
         ;
     if (ch == '-')
-        f = -f, ch = getchar();
-    while (!feof(stdin) && isdigit(ch))
+        f = -f, ch = getchar_unlocked();
+    while (isdigit(ch))
     {
         x = (x << 3) + (x << 1) + ch - 0x30;
-        ch = getchar();
+        ch = getchar_unlocked();
     }
     x *= f;
 }
