@@ -2,7 +2,7 @@
 using namespace std;
 typedef struct
 {
-    int l, r, dat, ld, rd, sum;
+    int first, second, dat, ld, rd, sum;
 } node;
 #define l(p) SegTree[p].l
 #define r(p) SegTree[p].r

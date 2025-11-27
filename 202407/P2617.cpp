@@ -5,7 +5,7 @@ int n, m, a[100007];
 typedef struct
 {
     set<int> arr;
-    int l, r;
+    int first, second;
 } node[400007];
 
 int main()
