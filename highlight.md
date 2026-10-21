@@ -13,7 +13,7 @@
 - $MAXN$ $MAXM$ 分清楚
 - 使用 ^1 建立反向边时
   - 边要从偶数开始编号
-  - ***空间要开两倍大！！！***
+  - **空间要开两倍大！！！**
 - 网络流
   - 最大流消耗流量，反向边要增加流量
   - $spfa$ 或 $bfs$ 增广路时只增广还有容量的边
@@ -45,5 +45,8 @@
 - 四倍空间
 - $lazy$ $tag$
   - 记得 $spread$
-- **$change$ 更新子结点后记得更新当前节点 **$data$
+- **$change$更新子结点后记得更新当前节点** $data$
 - 边界条件为 $l \le seg[node].l \wedge seg[node].r \le r$ , 不是 $seg[node].l == seg[node].r$
+
+## 基础数据结构
+- priority_queue默认大根堆，cmp默认为little，cmp结果最**差**的排第一个
